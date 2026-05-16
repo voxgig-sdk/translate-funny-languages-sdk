@@ -1,0 +1,44 @@
+# BasicTranslatorFlow
+
+main: kit: flow: BasicTranslatorFlow:
+{
+  entity: "translator",
+  kind: "basic",
+  name: "BasicTranslatorFlow",
+  step: [
+    {
+      input: {
+        ref: "translator_ref01"
+      }
+
+      match: {
+        translator: "translator01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "translator_ref01",
+        srcdatavar: "translator_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        translator: "translator01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-translator_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTranslatorFlow"
+}

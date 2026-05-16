@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://api.funtranslations.com/"
+      }
+      description: "Translate english to funny languages like Morse Code, Sith or Valyrian"
+      servers: [
+        {
+          description: "Production server"
+          url: "https://api.funtranslations.com"
+        }
+      ]
+      title: "Translate Funny Languages"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "translator": {
+      "TRANSLATOR00": {
+        "content": {},
+        "success": {},
+        "translator": "TRANSLATOR01"
+      },
+      "TRANSLATOR01": {
+        "content": {},
+        "success": {},
+        "translator": "TRANSLATOR01"
+      },
+      "TRANSLATOR02": {
+        "content": {},
+        "success": {},
+        "translator": "TRANSLATOR01"
+      }
+    }
+  },
+  "new": {
+    "translator": {
+      "translator_ref01": {
+        "content": {},
+        "success": {}
+      }
+    }
+  }
+}

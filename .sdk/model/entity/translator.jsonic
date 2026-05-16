@@ -1,0 +1,110 @@
+# Entity: translator
+
+main: kit: entity: translator: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "content"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "success"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "translator"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "translator"
+                orig: "translator"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "POST"
+          orig: "/translate/{translator}.json"
+          parts: [
+            "translate"
+            "{translator}.json"
+          ]
+          select: {
+            exist: [
+              "translator"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "translator"
+                orig: "translator"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "text"
+                orig: "text"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/translate/{translator}.json"
+          parts: [
+            "translate"
+            "{translator}.json"
+          ]
+          select: {
+            exist: [
+              "text"
+              "translator"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  relations: {
+    ancestors: [
+      [
+        "translate"
+      ]
+    ]
+  }
+
+
+
+}
