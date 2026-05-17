@@ -1,10 +1,10 @@
 package voxgigtranslatefunnylanguagessdk
 
 import (
-	"github.com/voxgig-sdk/translate-funny-languages-sdk/core"
-	"github.com/voxgig-sdk/translate-funny-languages-sdk/entity"
-	"github.com/voxgig-sdk/translate-funny-languages-sdk/feature"
-	_ "github.com/voxgig-sdk/translate-funny-languages-sdk/utility"
+	"github.com/voxgig-sdk/translate-funny-languages-sdk/go/core"
+	"github.com/voxgig-sdk/translate-funny-languages-sdk/go/entity"
+	"github.com/voxgig-sdk/translate-funny-languages-sdk/go/feature"
+	_ "github.com/voxgig-sdk/translate-funny-languages-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

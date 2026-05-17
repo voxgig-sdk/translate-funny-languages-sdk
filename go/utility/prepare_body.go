@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/translate-funny-languages-sdk/core"
+import "github.com/voxgig-sdk/translate-funny-languages-sdk/go/core"
 
 func prepareBodyUtil(ctx *core.Context) any {
 	op := ctx.Op

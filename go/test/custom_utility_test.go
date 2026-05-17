@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/translate-funny-languages-sdk"
+	sdk "github.com/voxgig-sdk/translate-funny-languages-sdk/go"
 )
 
 func TestCustomUtility(t *testing.T) {

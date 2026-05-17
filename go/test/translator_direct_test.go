@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/translate-funny-languages-sdk"
-	"github.com/voxgig-sdk/translate-funny-languages-sdk/core"
+	sdk "github.com/voxgig-sdk/translate-funny-languages-sdk/go"
+	"github.com/voxgig-sdk/translate-funny-languages-sdk/go/core"
 )
 
 func TestTranslatorDirect(t *testing.T) {

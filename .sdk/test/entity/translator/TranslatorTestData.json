@@ -4,17 +4,20 @@
       "TRANSLATOR00": {
         "content": {},
         "success": {},
-        "translator": "TRANSLATOR01"
+        "translator": "TRANSLATOR01",
+        "id": "TRANSLATOR00"
       },
       "TRANSLATOR01": {
         "content": {},
         "success": {},
-        "translator": "TRANSLATOR01"
+        "translator": "TRANSLATOR01",
+        "id": "TRANSLATOR01"
       },
       "TRANSLATOR02": {
         "content": {},
         "success": {},
-        "translator": "TRANSLATOR01"
+        "translator": "TRANSLATOR01",
+        "id": "TRANSLATOR02"
       }
     }
   },

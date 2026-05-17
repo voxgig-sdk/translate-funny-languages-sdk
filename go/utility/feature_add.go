@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/translate-funny-languages-sdk/core"
+import "github.com/voxgig-sdk/translate-funny-languages-sdk/go/core"
 
 func featureAddUtil(ctx *core.Context, f core.Feature) {
 	client := ctx.Client
