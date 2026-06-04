@@ -23,12 +23,9 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
-import os
 from translatefunnylanguages_sdk import TranslateFunnyLanguagesSDK
 
-client = TranslateFunnyLanguagesSDK({
-    "apikey": os.environ.get("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
-})
+client = TranslateFunnyLanguagesSDK({})
 ```
 
 ### 3. Load a translator
@@ -125,7 +122,6 @@ Create a `.env.local` file at the project root:
 
 ```
 TRANSLATE-FUNNY-LANGUAGES_TEST_LIVE=TRUE
-TRANSLATE-FUNNY-LANGUAGES_APIKEY=<your-key>
 ```
 
 Then run:
@@ -149,7 +145,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |
