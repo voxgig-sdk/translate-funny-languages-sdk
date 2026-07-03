@@ -59,12 +59,14 @@ def _translator_direct_setup(mockres):
     env = runner.env_override({
         "TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID": {},
         "TRANSLATEFUNNYLANGUAGES_TEST_LIVE": "FALSE",
+        "TRANSLATEFUNNYLANGUAGES_APIKEY": "NONE",
     })
 
     live = env.get("TRANSLATEFUNNYLANGUAGES_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("TRANSLATEFUNNYLANGUAGES_APIKEY"),
         }
         client = TranslateFunnyLanguagesSDK(merged_opts)
         return {

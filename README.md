@@ -1,19 +1,8 @@
 # TranslateFunnyLanguages SDK
 
-Translate English into fictional and novelty languages like Morse code, Sith, and Valyrian
+Translate Funny Languages client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Translate Funny Languages
-
-[Fun Translations](https://funtranslations.com/) runs a family of RESTful translation APIs that turn ordinary English into novelty or fictional languages. This SDK targets the small subset of those translators exposed under `https://api.funtranslations.com`, focused on funny and pop-culture languages.
-
-What you get from the API:
-- Single-shot text translation via a GET request, e.g. `GET /translate/morse.json?text=...`
-- Novelty translators including Morse code, Sith, and Valyrian, drawn from Fun Translations' wider catalogue of 100+ translators (Yoda, Shakespeare, Pirate, Minion, Game of Thrones, Star Wars, Elvish, Star Trek, and more).
-- JSON responses suitable for direct embedding in chat, games, or web UIs.
-
-Operational notes: the service is a RESTful JSON API authenticated by an API key tied to your Fun Translations account. Pricing is per-translator on monthly plans, and free-tier usage is heavily rate-limited. Specific quota numbers and endpoint contracts are documented per-translator on the provider's site rather than as a single OpenAPI spec.
 
 ## Try it
 
@@ -47,27 +36,31 @@ gem install translate-funny-languages-sdk
 luarocks install translate-funny-languages-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { TranslateFunnyLanguagesSDK } from 'translate-funny-languages'
 
-const client = new TranslateFunnyLanguagesSDK({})
+const client = new TranslateFunnyLanguagesSDK({
+  apikey: process.env.TRANSLATE-FUNNY-LANGUAGES_APIKEY,
+})
 
+// Load translator data
+const translator = await client.Translator().load({})
+console.log(translator.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -97,7 +90,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Translator** | A novelty language translator that converts English input text into a chosen fictional or stylised language; called via paths like `GET /translate/{language}.json?text=...` (for example `/translate/morse.json`). | `/translate/{translator}.json` |
+| **Translator** |  | `/translate/{translator}.json` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -107,15 +100,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from translatefunnylanguages_sdk import TranslateFunnyLanguagesSDK
 
-client = TranslateFunnyLanguagesSDK({})
+client = TranslateFunnyLanguagesSDK({
+    "apikey": os.environ.get("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
+})
 
 
 # Load a specific translator
-translator, err = client.Translator(None).load(
-    {"id": "example_id"}, None
-)
+translator, err = client.Translator().load({"id": "example_id"})
+print(translator)
 ```
 
 ### PHP
@@ -124,13 +119,14 @@ translator, err = client.Translator(None).load(
 <?php
 require_once 'translatefunnylanguages_sdk.php';
 
-$client = new TranslateFunnyLanguagesSDK([]);
+$client = new TranslateFunnyLanguagesSDK([
+    "apikey" => getenv("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
+]);
 
 
 // Load a specific translator
-[$translator, $err] = $client->Translator(null)->load(
-    ["id" => "example_id"], null
-);
+[$translator, $err] = $client->Translator()->load(["id" => "example_id"]);
+print_r($translator);
 ```
 
 ### Golang
@@ -138,8 +134,13 @@ $client = new TranslateFunnyLanguagesSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/translate-funny-languages-sdk/go"
 
-client := sdk.NewTranslateFunnyLanguagesSDK(map[string]any{})
+client := sdk.NewTranslateFunnyLanguagesSDK(map[string]any{
+    "apikey": os.Getenv("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
+})
 
+// Load translator data
+translator, err := client.Translator(nil).Load(map[string]any{}, nil)
+fmt.Println(translator)
 ```
 
 ### Ruby
@@ -147,13 +148,14 @@ client := sdk.NewTranslateFunnyLanguagesSDK(map[string]any{})
 ```ruby
 require_relative "TranslateFunnyLanguages_sdk"
 
-client = TranslateFunnyLanguagesSDK.new({})
+client = TranslateFunnyLanguagesSDK.new({
+  "apikey" => ENV["TRANSLATE-FUNNY-LANGUAGES_APIKEY"],
+})
 
 
 # Load a specific translator
-translator, err = client.Translator(nil).load(
-  { "id" => "example_id" }, nil
-)
+translator, err = client.Translator().load({ "id" => "example_id" })
+puts translator
 ```
 
 ### Lua
@@ -161,13 +163,14 @@ translator, err = client.Translator(nil).load(
 ```lua
 local sdk = require("translate-funny-languages_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
+})
 
 
 -- Load a specific translator
-local translator, err = client:Translator(nil):load(
-  { id = "example_id" }, nil
-)
+local translator, err = client:Translator():load({ id = "example_id" })
+print(translator)
 ```
 
 ## Unit testing in offline mode
@@ -186,25 +189,21 @@ const result = await client.Translator().load({ id: 'test01' })
 ### Python
 
 ```python
-client = TranslateFunnyLanguagesSDK.test(None, None)
-result, err = client.Translator(None).load(
-    {"id": "test01"}, None
-)
+client = TranslateFunnyLanguagesSDK.test()
+result, err = client.Translator().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = TranslateFunnyLanguagesSDK::test(null, null);
-[$result, $err] = $client->Translator(null)->load(
-    ["id" => "test01"], null
-);
+$client = TranslateFunnyLanguagesSDK::test();
+[$result, $err] = $client->Translator()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Translator(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -213,19 +212,15 @@ result, err := client.Translator(nil).Load(
 ### Ruby
 
 ```ruby
-client = TranslateFunnyLanguagesSDK.test(nil, nil)
-result, err = client.Translator(nil).load(
-  { "id" => "test01" }, nil
-)
+client = TranslateFunnyLanguagesSDK.test
+result, err = client.Translator().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Translator(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Translator():load({ id = "test01" })
 ```
 
 ## How it works
@@ -329,16 +324,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Translate Funny Languages
-
-- Upstream: [https://funtranslations.com/](https://funtranslations.com/)
-- API docs: [https://funtranslations.com/api](https://funtranslations.com/api)
-
-- Operated commercially by Fun Translations (https://funtranslations.com/).
-- Access uses an API key obtained by creating a free account; paid plans start around $4.99/month per translator.
-- No public licence text is published for response data; consult the provider's terms before redistributing translations.
-- Community catalogue listings have at times flagged the public endpoint as unreliable; check status before depending on it.
 
 ---
 

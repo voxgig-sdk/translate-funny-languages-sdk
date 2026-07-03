@@ -84,6 +84,7 @@ def translator_basic_setup(extra)
     "TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID" => idmap,
     "TRANSLATEFUNNYLANGUAGES_TEST_LIVE" => "FALSE",
     "TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN" => "FALSE",
+    "TRANSLATEFUNNYLANGUAGES_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,6 +96,7 @@ def translator_basic_setup(extra)
   if env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
+        "apikey" => env["TRANSLATEFUNNYLANGUAGES_APIKEY"],
       },
       extra || {},
     ])

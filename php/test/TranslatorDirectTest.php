@@ -67,12 +67,14 @@ function translator_direct_setup($mockres)
     $env = Runner::env_override([
         "TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID" => [],
         "TRANSLATEFUNNYLANGUAGES_TEST_LIVE" => "FALSE",
+        "TRANSLATEFUNNYLANGUAGES_APIKEY" => "NONE",
     ]);
 
     $live = $env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["TRANSLATEFUNNYLANGUAGES_APIKEY"],
         ];
         $client = new TranslateFunnyLanguagesSDK($merged_opts);
         return [

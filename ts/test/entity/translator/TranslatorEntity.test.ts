@@ -115,6 +115,7 @@ function basicSetup(extra?: any) {
     'TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID': idmap,
     'TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE': 'FALSE',
     'TRANSLATE_FUNNY_LANGUAGES_TEST_EXPLAIN': 'FALSE',
+    'TRANSLATE_FUNNY_LANGUAGES_APIKEY': 'NONE',
   })
 
   idmap = env['TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID']
@@ -124,6 +125,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new TranslateFunnyLanguagesSDK(merge([
       {
+        apikey: env.TRANSLATE_FUNNY_LANGUAGES_APIKEY,
       },
       extra
     ]))

@@ -99,12 +99,14 @@ func translatorDirectSetup(mockres any) *translatorDirectSetupResult {
 	env := envOverride(map[string]any{
 		"TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID": map[string]any{},
 		"TRANSLATEFUNNYLANGUAGES_TEST_LIVE":    "FALSE",
+		"TRANSLATEFUNNYLANGUAGES_APIKEY":       "NONE",
 	})
 
 	live := env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["TRANSLATEFUNNYLANGUAGES_APIKEY"],
 		}
 		client := sdk.NewTranslateFunnyLanguagesSDK(mergedOpts)
 

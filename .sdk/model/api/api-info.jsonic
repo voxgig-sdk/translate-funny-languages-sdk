@@ -16,26 +16,7 @@ main: {
       ]
       title: "Translate Funny Languages"
       version: "1.0.0"
-      tagline: "Translate English into fictional and novelty languages like Morse code, Sith, and Valyrian"
-      homepage: "https://funtranslations.com/"
-      docs_url: "https://funtranslations.com/api"
-      license_short: "Commercial API by Fun Translations; API key required, paid tiers from $4.99/month per translator."
-      license_md: `- Operated commercially by Fun Translations (https://funtranslations.com/).
-- Access uses an API key obtained by creating a free account; paid plans start around $4.99/month per translator.
-- No public licence text is published for response data; consult the provider's terms before redistributing translations.
-- Community catalogue listings have at times flagged the public endpoint as unreliable; check status before depending on it.`
-      about_md: `[Fun Translations](https://funtranslations.com/) runs a family of RESTful translation APIs that turn ordinary English into novelty or fictional languages. This SDK targets the small subset of those translators exposed under \`https://api.funtranslations.com\`, focused on funny and pop-culture languages.
-
-What you get from the API:
-- Single-shot text translation via a GET request, e.g. \`GET /translate/morse.json?text=...\`
-- Novelty translators including Morse code, Sith, and Valyrian, drawn from Fun Translations' wider catalogue of 100+ translators (Yoda, Shakespeare, Pirate, Minion, Game of Thrones, Star Wars, Elvish, Star Trek, and more).
-- JSON responses suitable for direct embedding in chat, games, or web UIs.
-
-Operational notes: the service is a RESTful JSON API authenticated by an API key tied to your Fun Translations account. Pricing is per-translator on monthly plans, and free-tier usage is heavily rate-limited. Specific quota numbers and endpoint contracts are documented per-translator on the provider's site rather than as a single OpenAPI spec.`
-      entity_desc: {
-        translator: "A novelty language translator that converts English input text into a chosen fictional or stylised language; called via paths like `GET /translate/{language}.json?text=...` (for example `/translate/morse.json`)."
-      }
-      auth: false
     }
   }
 }
+

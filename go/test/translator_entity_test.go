@@ -121,6 +121,7 @@ func translatorBasicSetup(extra map[string]any) *entityTestSetup {
 		"TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID": idmap,
 		"TRANSLATEFUNNYLANGUAGES_TEST_LIVE":      "FALSE",
 		"TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN":   "FALSE",
+		"TRANSLATEFUNNYLANGUAGES_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID"])
@@ -131,6 +132,7 @@ func translatorBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["TRANSLATEFUNNYLANGUAGES_APIKEY"],
 			},
 			extra,
 		})
