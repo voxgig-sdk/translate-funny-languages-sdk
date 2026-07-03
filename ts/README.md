@@ -10,7 +10,7 @@ The TypeScript SDK for the TranslateFunnyLanguages API — a type-safe, entity-o
 
 ## Install
 ```bash
-npm install translate-funny-languages
+npm install @voxgig-sdk/translate-funny-languages
 ```
 ## Tutorial: your first API call
 

@@ -10,7 +10,7 @@ The PHP SDK for the TranslateFunnyLanguages API — an entity-oriented client us
 
 ## Install
 ```bash
-composer require voxgig/translate-funny-languages-sdk
+composer require voxgig-sdk/translate-funny-languages
 ```
 
 

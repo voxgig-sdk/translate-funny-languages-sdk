@@ -10,7 +10,7 @@ The Lua SDK for the TranslateFunnyLanguages API — an entity-oriented client us
 
 ## Install
 ```bash
-luarocks install translate-funny-languages-sdk
+luarocks install voxgig-sdk-translate-funny-languages
 ```
 
 If the module is not yet published, add the source directory to

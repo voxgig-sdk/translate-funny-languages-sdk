@@ -10,7 +10,7 @@ The Python SDK for the TranslateFunnyLanguages API — an entity-oriented client
 
 ## Install
 ```bash
-pip install translate-funny-languages-sdk
+pip install voxgig-sdk-translate-funny-languages
 ```
 
 Or install from source:

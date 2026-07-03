@@ -10,13 +10,13 @@ The Ruby SDK for the TranslateFunnyLanguages API — an entity-oriented client u
 
 ## Install
 ```bash
-gem install translate-funny-languages-sdk
+gem install voxgig-sdk-translate-funny-languages
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "translate-funny-languages-sdk"
+gem "voxgig-sdk-translate-funny-languages"
 ```
 
 Then run:
