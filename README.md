@@ -26,9 +26,9 @@ import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-language
 
 const client = new TranslateFunnyLanguagesSDK()
 
-// Load translator data
-const translator = await client.translator.load({})
-console.log(translator.data)
+// Load translator data (returns a Translator)
+const translator = await client.Translator().load()
+console.log(translator)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -84,8 +84,8 @@ from translatefunnylanguages_sdk import TranslateFunnyLanguagesSDK
 client = TranslateFunnyLanguagesSDK()
 
 
-# Load a specific translator
-translator = client.translator.load({"id": "example_id"})
+# Load a specific translator (returns the record, raises on error)
+translator = client.Translator().load({"id": "example_id"})
 print(translator)
 ```
 
@@ -98,8 +98,8 @@ require_once 'translatefunnylanguages_sdk.php';
 $client = new TranslateFunnyLanguagesSDK();
 
 
-// Load a specific translator
-$translator = $client->translator()->load(["id" => "example_id"]);
+// Load a specific translator (returns the bare record; throws on error)
+$translator = $client->Translator()->load(["id" => "example_id"]);
 print_r($translator);
 ```
 
@@ -123,8 +123,8 @@ require_relative "TranslateFunnyLanguages_sdk"
 client = TranslateFunnyLanguagesSDK.new
 
 
-# Load a specific translator
-translator = client.translator.load({ "id" => "example_id" })
+# Load a specific translator (returns the bare record; raises on error)
+translator = client.Translator.load({ "id" => "example_id" })
 puts translator
 ```
 
@@ -137,7 +137,7 @@ local client = sdk.new()
 
 
 -- Load a specific translator
-local translator, err = client:translator():load({ id = "example_id" })
+local translator, err = client:Translator():load({ id = "example_id" })
 print(translator)
 ```
 
@@ -150,22 +150,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = TranslateFunnyLanguagesSDK.test()
-const result = await client.translator.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const translator = await client.Translator().load({ id: 'test01' })
+// translator is a bare Translator populated with mock data
+console.log(translator)
 ```
 
 ### Python
 
 ```python
 client = TranslateFunnyLanguagesSDK.test()
-result = client.translator.load({"id": "test01"})
+translator = client.Translator().load({"id": "test01"})
+print(translator)
 ```
 
 ### PHP
 
 ```php
-$client = TranslateFunnyLanguagesSDK::test();
-$result = $client->translator()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = TranslateFunnyLanguagesSDK::test([
+    "entity" => ["translator" => ["test01" => ["id" => "test01"]]],
+]);
+$translator = $client->Translator()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -180,15 +185,18 @@ result, err := client.Translator(nil).Load(
 ### Ruby
 
 ```ruby
-client = TranslateFunnyLanguagesSDK.test
-result = client.translator.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = TranslateFunnyLanguagesSDK.test({
+  "entity" => { "translator" => { "test01" => { "id" => "test01" } } },
+})
+translator = client.Translator.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:translator():load({ id = "test01" })
+local result, err = client:Translator():load({ id = "test01" })
 ```
 
 ## How it works
@@ -236,6 +244,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

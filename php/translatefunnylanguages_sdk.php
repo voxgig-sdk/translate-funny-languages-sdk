@@ -233,10 +233,10 @@ class TranslateFunnyLanguagesSDK
 
     private $_translator = null;
 
-    // Idiomatic facade: $client->translator()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Translator() (PHP method
-    // names are case-insensitive).
-    public function translator($data = null)
+    // Canonical facade: $client->Translator()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->translator()
+    // resolves here too.
+    public function Translator($data = null)
     {
         require_once __DIR__ . '/entity/translator_entity.php';
         if ($data === null) {

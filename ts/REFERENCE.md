@@ -109,7 +109,7 @@ Alias for `TranslateFunnyLanguagesSDK.test()`.
 ## TranslatorEntity
 
 ```ts
-const translator = client.translator
+const translator = client.Translator()
 ```
 
 ### Fields
@@ -126,7 +126,7 @@ const translator = client.translator
 Create a new entity with the given data.
 
 ```ts
-const result = await client.translator.create({
+const result = await client.Translator().create({
 })
 ```
 
@@ -135,7 +135,7 @@ const result = await client.translator.create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.translator.load({ id: 'translator_id' })
+const result = await client.Translator().load({ id: 'translator_id' })
 ```
 
 ### Common Methods

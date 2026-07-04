@@ -33,9 +33,10 @@ $client = new TranslateFunnyLanguagesSDK();
 
 ```php
 try {
-    $result = $client->translator()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Translator record (throws on error).
+    $translator = $client->Translator()->load(["id" => "example_id"]);
+    print_r($translator);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -43,8 +44,8 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// Create
-$created = $client->translator()->create(["name" => "Example"]);
+// create() returns the bare created Translator record.
+$created = $client->Translator()->create(["name" => "Example"]);
 
 ```
 
@@ -89,13 +90,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = TranslateFunnyLanguagesSDK::test();
+$client = TranslateFunnyLanguagesSDK::test([
+    "entity" => ["translator" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->translator()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$translator = $client->Translator()->load(["id" => "test01"]);
+print_r($translator);
 ```
 
 ### Use a custom fetch function
@@ -232,7 +237,7 @@ API path: `/translate/{translator}.json`
 
 ### Translator
 
-Create an instance: `const translator = client.translator`
+Create an instance: `$translator = $client->Translator();`
 
 #### Operations
 
@@ -250,15 +255,16 @@ Create an instance: `const translator = client.translator`
 
 #### Example: Load
 
-```ts
-const translator = await client.translator.load({ id: 'translator_id' })
+```php
+// load() returns the bare Translator record (throws on error).
+$translator = $client->Translator()->load(["id" => "translator_id"]);
 ```
 
 #### Example: Create
 
-```ts
-const translator = await client.translator.create({
-})
+```php
+$translator = $client->Translator()->create([
+]);
 ```
 
 
@@ -333,7 +339,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$translator = $client->translator();
+$translator = $client->Translator();
 $translator->load(["id" => "example_id"]);
 
 // $translator->dataGet() now returns the loaded translator data

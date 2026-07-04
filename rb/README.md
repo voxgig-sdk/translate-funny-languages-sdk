@@ -32,8 +32,9 @@ client = TranslateFunnyLanguagesSDK.new
 
 ```ruby
 begin
-  result = client.translator.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Translator record (raises on error).
+  translator = client.Translator.load({ "id" => "example_id" })
+  puts translator
 rescue => err
   warn "load failed: #{err}"
 end
@@ -42,8 +43,8 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# Create
-created = client.translator.create({ "name" => "Example" })
+# create returns the bare created Translator record.
+created = client.Translator.create({ "name" => "Example" })
 
 ```
 
@@ -88,13 +89,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = TranslateFunnyLanguagesSDK.test
+client = TranslateFunnyLanguagesSDK.test({
+  "entity" => { "translator" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.translator.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+translator = client.Translator.load({ "id" => "test01" })
+puts translator
 ```
 
 ### Use a custom fetch function
@@ -227,7 +232,7 @@ API path: `/translate/{translator}.json`
 
 ### Translator
 
-Create an instance: `const translator = client.translator`
+Create an instance: `translator = client.Translator`
 
 #### Operations
 
@@ -245,14 +250,15 @@ Create an instance: `const translator = client.translator`
 
 #### Example: Load
 
-```ts
-const translator = await client.translator.load({ id: 'translator_id' })
+```ruby
+# load returns the bare Translator record (raises on error).
+translator = client.Translator.load({ "id" => "translator_id" })
 ```
 
 #### Example: Create
 
-```ts
-const translator = await client.translator.create({
+```ruby
+translator = client.Translator.create({
 })
 ```
 
@@ -328,7 +334,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-translator = client.translator
+translator = client.Translator
 translator.load({ "id" => "example_id" })
 
 # translator.data_get now returns the loaded translator data

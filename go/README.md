@@ -30,49 +30,38 @@ go mod edit -replace github.com/voxgig-sdk/translate-funny-languages-sdk/go=../t
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/translate-funny-languages-sdk/go"
-    "github.com/voxgig-sdk/translate-funny-languages-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 3. Load a translator
-
-```go
-    result, err = client.Translator(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single translator — the value is the loaded record.
+    translator, err := client.Translator(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
+    fmt.Println(translator)
 
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
+    // Create a translator.
+    created, err := client.Translator(nil).Create(map[string]any{"name": "Example"}, nil)
+    if err != nil {
+        panic(err)
     }
+    fmt.Println(created)
 }
-```
-
-### 4. Create, update, and remove
-
-```go
-// Create
-created, _ := client.Translator(nil).Create(
-    map[string]any{"name": "Example"}, nil,
-)
-cm := core.ToMapAny(created)
-newID := core.ToMapAny(cm["data"])["id"]
-
 ```
 
 
@@ -122,10 +111,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Translator(nil).Load(
+translator, err := client.Translator(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(translator) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -222,17 +214,24 @@ All entities implement the `TranslateFunnyLanguagesEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    translator, err := client.Translator(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // translator is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -273,7 +272,11 @@ Create an instance: `translator := client.Translator(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Translator(nil).Load(map[string]any{"id": "translator_id"}, nil)
+translator, err := client.Translator(nil).Load(map[string]any{"id": "translator_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(translator) // the loaded record
 ```
 
 #### Example: Create

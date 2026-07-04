@@ -80,7 +80,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## TranslatorEntity
 
 ```python
-translator = client.translator
+translator = client.Translator()
 ```
 
 ### Fields
@@ -97,7 +97,7 @@ translator = client.translator
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.translator.create({
+result = client.Translator().create({
 })
 ```
 
@@ -106,7 +106,7 @@ result = client.translator.create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.translator.load({"id": "translator_id"})
+result = client.Translator().load({"id": "translator_id"})
 ```
 
 ### Common Methods

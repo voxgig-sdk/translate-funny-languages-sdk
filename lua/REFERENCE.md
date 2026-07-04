@@ -83,7 +83,7 @@ same parameters as `direct()`.
 ## TranslatorEntity
 
 ```lua
-local translator = client:translator(nil)
+local translator = client:Translator(nil)
 ```
 
 ### Fields
@@ -100,7 +100,7 @@ local translator = client:translator(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:translator():create({
+local result, err = client:Translator():create({
 })
 ```
 
@@ -109,7 +109,7 @@ local result, err = client:translator():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:translator():load({ id = "translator_id" })
+local result, err = client:Translator():load({ id = "translator_id" })
 ```
 
 ### Common Methods

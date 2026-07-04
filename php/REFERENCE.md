@@ -85,7 +85,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## TranslatorEntity
 
 ```php
-$translator = $client->translator();
+$translator = $client->Translator();
 ```
 
 ### Fields
@@ -102,7 +102,7 @@ $translator = $client->translator();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->translator()->create([
+$result = $client->Translator()->create([
 ]);
 ```
 
@@ -111,7 +111,7 @@ $result = $client->translator()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->translator()->load(["id" => "translator_id"]);
+$result = $client->Translator()->load(["id" => "translator_id"]);
 ```
 
 ### Common Methods

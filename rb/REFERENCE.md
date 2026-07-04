@@ -86,7 +86,7 @@ same parameters as `direct()`. Raises on error.
 ## TranslatorEntity
 
 ```ruby
-translator = client.translator
+translator = client.Translator
 ```
 
 ### Fields
@@ -103,7 +103,7 @@ translator = client.translator
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.translator.create({
+result = client.Translator.create({
 })
 ```
 
@@ -112,7 +112,7 @@ result = client.translator.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.translator.load({ "id" => "translator_id" })
+result = client.Translator.load({ "id" => "translator_id" })
 ```
 
 ### Common Methods

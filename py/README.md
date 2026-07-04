@@ -33,10 +33,12 @@ client = TranslateFunnyLanguagesSDK()
 
 ### 3. Load a translator
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.translator.load({"id": "example_id"})
-    print(result)
+    translator = client.Translator().load({"id": "example_id"})
+    print(translator)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -44,8 +46,8 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.translator.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.Translator().create({"name": "Example"})
 
 ```
 
@@ -92,8 +94,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = TranslateFunnyLanguagesSDK.test()
 
-result = client.translator.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+translator = client.Translator().load({"id": "test01"})
+# translator contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -227,7 +230,7 @@ API path: `/translate/{translator}.json`
 
 ### Translator
 
-Create an instance: `const translator = client.translator`
+Create an instance: `translator = client.Translator()`
 
 #### Operations
 
@@ -245,14 +248,14 @@ Create an instance: `const translator = client.translator`
 
 #### Example: Load
 
-```ts
-const translator = await client.translator.load({ id: 'translator_id' })
+```python
+translator = client.Translator().load({"id": "translator_id"})
 ```
 
 #### Example: Create
 
-```ts
-const translator = await client.translator.create({
+```python
+translator = client.Translator().create({
 })
 ```
 
@@ -327,7 +330,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-translator = client.translator
+translator = client.Translator()
 translator.load({"id": "example_id"})
 
 # translator.data_get() now returns the loaded translator data

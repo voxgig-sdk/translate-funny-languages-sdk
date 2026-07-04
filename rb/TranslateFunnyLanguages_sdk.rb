@@ -208,13 +208,7 @@ class TranslateFunnyLanguagesSDK
   end
 
 
-  # Idiomatic facade: client.translator.list / client.translator.load({ "id" => ... })
-  def translator
-    require_relative 'entity/translator_entity'
-    @translator ||= TranslatorEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.translator instead.
+  # Canonical facade: client.Translator.list / client.Translator.load({ "id" => ... })
   def Translator(data = nil)
     require_relative 'entity/translator_entity'
     TranslatorEntity.new(self, data)

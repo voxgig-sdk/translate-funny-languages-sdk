@@ -204,14 +204,7 @@ class TranslateFunnyLanguagesSDK {
 
 
 
-  _translator?: TranslatorEntity
-
-  // Idiomatic facade: `client.translator.list()` / `client.translator.load({ id })`.
-  get translator(): TranslatorEntity {
-    return (this._translator ??= new TranslatorEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.translator` instead. */
+  // Entity access: `client.Translator().list()` / `client.Translator().load({ id })`.
   Translator(data?: any) {
     const self = this
     return new TranslatorEntity(self,data)

@@ -34,16 +34,17 @@ local client = sdk.new()
 ### 3. Load a translator
 
 ```lua
-local result, err = client:translator():load({ id = "example_id" })
+local translator, err = client:Translator():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(translator)
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:translator():create({ name = "Example" })
+local created, err = client:Translator():create({ name = "Example" })
+if err then error(err) end
 
 ```
 
@@ -90,8 +91,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:translator():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Translator():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -191,17 +192,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local translator, err = client:Translator():load({ id = "example_id" })
+    if err then error(err) end
+    -- translator is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -223,7 +229,7 @@ API path: `/translate/{translator}.json`
 
 ### Translator
 
-Create an instance: `const translator = client.translator`
+Create an instance: `local translator = client:Translator(nil)`
 
 #### Operations
 
@@ -241,14 +247,14 @@ Create an instance: `const translator = client.translator`
 
 #### Example: Load
 
-```ts
-const translator = await client.translator.load({ id: 'translator_id' })
+```lua
+local translator, err = client:Translator():load({ id = "translator_id" })
 ```
 
 #### Example: Create
 
-```ts
-const translator = await client.translator.create({
+```lua
+local translator, err = client:Translator():create({
 })
 ```
 
@@ -324,7 +330,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local translator = client:translator()
+local translator = client:Translator()
 translator:load({ id = "example_id" })
 
 -- translator:data_get() now returns the loaded translator data

@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:translator():list() / client:translator():load({ id = ... })
-function TranslateFunnyLanguagesSDK:translator(data)
+-- Idiomatic facade: client:Translator():list() / client:Translator():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TranslateFunnyLanguagesSDK:Translator(data)
   local EntityMod = require("entity.translator_entity")
   if data == nil then
     if self._translator == nil then
@@ -253,12 +254,6 @@ function TranslateFunnyLanguagesSDK:translator(data)
     end
     return self._translator
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:translator() instead.
-function TranslateFunnyLanguagesSDK:Translator(data)
-  local EntityMod = require("entity.translator_entity")
   return EntityMod.new(self, data)
 end
 
