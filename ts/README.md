@@ -9,9 +9,12 @@ The TypeScript SDK for the TranslateFunnyLanguages API — a type-safe, entity-o
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/translate-funny-languages
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { TranslateFunnyLanguagesSDK } from 'translate-funny-languages'
+import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages'
 
-const client = new TranslateFunnyLanguagesSDK({
-  apikey: process.env.TRANSLATE-FUNNY-LANGUAGES_APIKEY,
-})
+const client = new TranslateFunnyLanguagesSDK()
 ```
 
 ### 3. Load a translator
 
 ```ts
-const result = await client.Translator().load({ id: 'example_id' })
+const result = await client.translator.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -41,7 +42,7 @@ if (result.ok) {
 
 ```ts
 // Create
-const created = await client.Translator().create({
+const created = await client.translator.create({
   name: 'Example',
 })
 
@@ -89,7 +90,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = TranslateFunnyLanguagesSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.translator.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -97,7 +98,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new TranslateFunnyLanguagesSDK({ apikey: '...' })
+const client = new TranslateFunnyLanguagesSDK()
 const testClient = client.tester()
 ```
 
@@ -106,7 +107,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.translator
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -133,7 +134,6 @@ const logger = {
 }
 
 const client = new TranslateFunnyLanguagesSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -143,8 +143,7 @@ const client = new TranslateFunnyLanguagesSDK({
 Create a `.env.local` file at the project root:
 
 ```
-TRANSLATE-FUNNY-LANGUAGES_TEST_LIVE=TRUE
-TRANSLATE-FUNNY-LANGUAGES_APIKEY=<your-key>
+TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -162,7 +161,6 @@ cd ts && npm test
 
 ```ts
 new TranslateFunnyLanguagesSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -173,7 +171,6 @@ new TranslateFunnyLanguagesSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -277,7 +274,7 @@ API path: `/translate/{translator}.json`
 
 ### Translator
 
-Create an instance: `const translator = client.Translator()`
+Create an instance: `const translator = client.translator`
 
 #### Operations
 
@@ -296,13 +293,13 @@ Create an instance: `const translator = client.Translator()`
 #### Example: Load
 
 ```ts
-const translator = await client.Translator().load({ id: 'translator_id' })
+const translator = await client.translator.load({ id: 'translator_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const translator = await client.Translator().create({
+const translator = await client.translator.create({
 })
 ```
 
@@ -364,7 +361,7 @@ translate-funny-languages/
 Import the SDK from the package root:
 
 ```ts
-import { TranslateFunnyLanguagesSDK } from 'translate-funny-languages'
+import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages'
 ```
 
 ### Entity state
@@ -374,11 +371,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const translator = client.translator
+await translator.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// translator.data() now returns the loaded translator data
+// translator.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

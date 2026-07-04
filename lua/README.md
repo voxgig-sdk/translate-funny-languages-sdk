@@ -9,12 +9,9 @@ The Lua SDK for the TranslateFunnyLanguages API — an entity-oriented client us
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-translate-funny-languages
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("translate-funny-languages_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 3. Load a translator
 
 ```lua
-local result, err = client:Translator():load({ id = "example_id" })
+local result, err = client:translator():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -48,7 +43,7 @@ print(result)
 
 ```lua
 -- Create
-local created, _ = client:Translator():create({ name = "Example" })
+local created, _ = client:translator():create({ name = "Example" })
 
 ```
 
@@ -95,7 +90,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:TranslateFunnyLanguages():load({ id = "test01" })
+local result, err = client:translator():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -128,8 +123,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-TRANSLATE-FUNNY-LANGUAGES_TEST_LIVE=TRUE
-TRANSLATE-FUNNY-LANGUAGES_APIKEY=<your-key>
+TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -152,7 +146,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -230,7 +223,7 @@ API path: `/translate/{translator}.json`
 
 ### Translator
 
-Create an instance: `const translator = client.Translator()`
+Create an instance: `const translator = client.translator`
 
 #### Operations
 
@@ -249,13 +242,13 @@ Create an instance: `const translator = client.Translator()`
 #### Example: Load
 
 ```ts
-const translator = await client.Translator().load({ id: 'translator_id' })
+const translator = await client.translator.load({ id: 'translator_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const translator = await client.Translator().create({
+const translator = await client.translator.create({
 })
 ```
 
@@ -331,11 +324,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local translator = client:translator()
+translator:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- translator:data_get() now returns the loaded translator data
+-- translator:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

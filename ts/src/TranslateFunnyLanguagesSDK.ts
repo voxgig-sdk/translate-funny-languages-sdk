@@ -2,6 +2,8 @@
 
 import { TranslatorEntity } from './entity/TranslatorEntity'
 
+export type * from './TranslateFunnyLanguagesTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -202,6 +204,14 @@ class TranslateFunnyLanguagesSDK {
 
 
 
+  _translator?: TranslatorEntity
+
+  // Idiomatic facade: `client.translator.list()` / `client.translator.load({ id })`.
+  get translator(): TranslatorEntity {
+    return (this._translator ??= new TranslatorEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.translator` instead. */
   Translator(data?: any) {
     const self = this
     return new TranslatorEntity(self,data)

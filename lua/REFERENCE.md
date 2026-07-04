@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -84,7 +83,7 @@ same parameters as `direct()`.
 ## TranslatorEntity
 
 ```lua
-local translator = client:Translator(nil)
+local translator = client:translator(nil)
 ```
 
 ### Fields
@@ -101,7 +100,7 @@ local translator = client:Translator(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Translator():create({
+local result, err = client:translator():create({
 })
 ```
 
@@ -110,7 +109,7 @@ local result, err = client:Translator():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Translator():load({ id = "translator_id" })
+local result, err = client:translator():load({ id = "translator_id" })
 ```
 
 ### Common Methods

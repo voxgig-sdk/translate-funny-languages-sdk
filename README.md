@@ -10,26 +10,24 @@ This is an unofficial SDK for the Translate Funny Languages public API, generate
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/translate-funny-languages` | `npm install @voxgig-sdk/translate-funny-languages` |
-| Python | `voxgig-sdk-translate-funny-languages` | `pip install voxgig-sdk-translate-funny-languages` |
-| PHP | `voxgig-sdk/translate-funny-languages` | `composer require voxgig-sdk/translate-funny-languages` |
-| Golang | `github.com/voxgig-sdk/translate-funny-languages-sdk/go` | `go get github.com/voxgig-sdk/translate-funny-languages-sdk/go` |
-| Ruby | `voxgig-sdk-translate-funny-languages` | `gem install voxgig-sdk-translate-funny-languages` |
-| Lua | `voxgig-sdk-translate-funny-languages` | `luarocks install voxgig-sdk-translate-funny-languages` |
+| TypeScript | `@voxgig-sdk/translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
+| Python | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
+| PHP | `voxgig-sdk/translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
+| Golang | `github.com/voxgig-sdk/translate-funny-languages-sdk/go` | `go get github.com/voxgig-sdk/translate-funny-languages-sdk/go@latest` |
+| Ruby | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
+| Lua | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
 
 ## Quickstart
 
 ### TypeScript
 
 ```ts
-import { TranslateFunnyLanguagesSDK } from 'translate-funny-languages'
+import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages'
 
-const client = new TranslateFunnyLanguagesSDK({
-  apikey: process.env.TRANSLATE-FUNNY-LANGUAGES_APIKEY,
-})
+const client = new TranslateFunnyLanguagesSDK()
 
 // Load translator data
-const translator = await client.Translator().load({})
+const translator = await client.translator.load({})
 console.log(translator.data)
 ```
 
@@ -71,7 +69,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Translator** |  | `/translate/{translator}.json` |
+| **Translator** | The Translator entity (create, load). | `/translate/{translator}.json` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -81,16 +79,13 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
-import os
 from translatefunnylanguages_sdk import TranslateFunnyLanguagesSDK
 
-client = TranslateFunnyLanguagesSDK({
-    "apikey": os.environ.get("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
-})
+client = TranslateFunnyLanguagesSDK()
 
 
 # Load a specific translator
-translator, err = client.Translator().load({"id": "example_id"})
+translator = client.translator.load({"id": "example_id"})
 print(translator)
 ```
 
@@ -100,13 +95,11 @@ print(translator)
 <?php
 require_once 'translatefunnylanguages_sdk.php';
 
-$client = new TranslateFunnyLanguagesSDK([
-    "apikey" => getenv("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
-]);
+$client = new TranslateFunnyLanguagesSDK();
 
 
 // Load a specific translator
-[$translator, $err] = $client->Translator()->load(["id" => "example_id"]);
+$translator = $client->translator()->load(["id" => "example_id"]);
 print_r($translator);
 ```
 
@@ -115,9 +108,7 @@ print_r($translator);
 ```go
 import sdk "github.com/voxgig-sdk/translate-funny-languages-sdk/go"
 
-client := sdk.NewTranslateFunnyLanguagesSDK(map[string]any{
-    "apikey": os.Getenv("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
-})
+client := sdk.New()
 
 // Load translator data
 translator, err := client.Translator(nil).Load(map[string]any{}, nil)
@@ -129,13 +120,11 @@ fmt.Println(translator)
 ```ruby
 require_relative "TranslateFunnyLanguages_sdk"
 
-client = TranslateFunnyLanguagesSDK.new({
-  "apikey" => ENV["TRANSLATE-FUNNY-LANGUAGES_APIKEY"],
-})
+client = TranslateFunnyLanguagesSDK.new
 
 
 # Load a specific translator
-translator, err = client.Translator().load({ "id" => "example_id" })
+translator = client.translator.load({ "id" => "example_id" })
 puts translator
 ```
 
@@ -144,13 +133,11 @@ puts translator
 ```lua
 local sdk = require("translate-funny-languages_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("TRANSLATE-FUNNY-LANGUAGES_APIKEY"),
-})
+local client = sdk.new()
 
 
 -- Load a specific translator
-local translator, err = client:Translator():load({ id = "example_id" })
+local translator, err = client:translator():load({ id = "example_id" })
 print(translator)
 ```
 
@@ -163,7 +150,7 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = TranslateFunnyLanguagesSDK.test()
-const result = await client.Translator().load({ id: 'test01' })
+const result = await client.translator.load({ id: 'test01' })
 // result.ok === true, result.data contains mock data
 ```
 
@@ -171,14 +158,14 @@ const result = await client.Translator().load({ id: 'test01' })
 
 ```python
 client = TranslateFunnyLanguagesSDK.test()
-result, err = client.Translator().load({"id": "test01"})
+result = client.translator.load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
 $client = TranslateFunnyLanguagesSDK::test();
-[$result, $err] = $client->Translator()->load(["id" => "test01"]);
+$result = $client->translator()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -194,14 +181,14 @@ result, err := client.Translator(nil).Load(
 
 ```ruby
 client = TranslateFunnyLanguagesSDK.test
-result, err = client.Translator().load({ "id" => "test01" })
+result = client.translator.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Translator():load({ id = "test01" })
+local result, err = client:translator():load({ id = "test01" })
 ```
 
 ## How it works
@@ -254,7 +241,7 @@ console.log(result.data)
 
 **Python:**
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
@@ -263,7 +250,7 @@ result, err = client.direct({
 
 **PHP:**
 ```php
-[$result, $err] = $client->direct([
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
@@ -281,7 +268,7 @@ result, err := client.Direct(map[string]any{
 
 **Ruby:**
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },

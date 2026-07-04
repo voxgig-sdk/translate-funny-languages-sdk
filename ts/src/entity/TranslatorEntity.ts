@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Translator,
+  TranslatorLoadMatch,
+  TranslatorCreateData,
+} from '../TranslateFunnyLanguagesTypes'
 
 // TODO: needs Entity superclass
-class TranslatorEntity extends TranslateFunnyLanguagesEntityBase {
+class TranslatorEntity extends TranslateFunnyLanguagesEntityBase<Translator> {
 
   constructor(client: TranslateFunnyLanguagesSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class TranslatorEntity extends TranslateFunnyLanguagesEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: TranslatorLoadMatch, ctrl?: Control): Promise<Translator> {
 
     const utility = this._utility
 
@@ -136,7 +141,9 @@ class TranslatorEntity extends TranslateFunnyLanguagesEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Translator> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
@@ -144,7 +151,7 @@ class TranslatorEntity extends TranslateFunnyLanguagesEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: TranslatorCreateData, ctrl?: Control): Promise<Translator> {
 
     const utility = this._utility
     const {
@@ -243,7 +250,9 @@ class TranslatorEntity extends TranslateFunnyLanguagesEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Translator> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

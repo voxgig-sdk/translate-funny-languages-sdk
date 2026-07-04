@@ -245,6 +245,9 @@ func (sdk *TranslateFunnyLanguagesSDK) Direct(fetchargs map[string]any) (map[str
 }
 
 
+// Translator returns a Translator entity bound to this client.
+// Idiomatic usage: client.Translator(nil).List(nil, nil) or
+// client.Translator(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TranslateFunnyLanguagesSDK) Translator(data map[string]any) TranslateFunnyLanguagesEntity {
 	return NewTranslatorEntityFunc(sdk, data)
 }

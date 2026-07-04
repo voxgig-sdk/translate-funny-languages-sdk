@@ -15,9 +15,6 @@ module TranslateFunnyLanguagesConfig
       },
       "options" => {
         "base" => "https://api.funtranslations.com",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -60,6 +57,7 @@ module TranslateFunnyLanguagesConfig
                         "orig" => "translator",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },
@@ -98,6 +96,7 @@ module TranslateFunnyLanguagesConfig
                         "orig" => "translator",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                     "query" => [

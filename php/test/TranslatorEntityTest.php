@@ -44,15 +44,13 @@ class TranslatorEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.translator"), "translator_ref01"));
         $translator_ref01_data["translator"] = $setup["idmap"]["translator01"];
 
-        [$translator_ref01_data_result, $err] = $translator_ref01_ent->create($translator_ref01_data, null);
-        $this->assertNull($err);
+        $translator_ref01_data_result = $translator_ref01_ent->create($translator_ref01_data, null);
         $translator_ref01_data = Helpers::to_map($translator_ref01_data_result);
         $this->assertNotNull($translator_ref01_data);
 
         // LOAD
         $translator_ref01_match_dt0 = [];
-        [$translator_ref01_data_dt0_loaded, $err] = $translator_ref01_ent->load($translator_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $translator_ref01_data_dt0_loaded = $translator_ref01_ent->load($translator_ref01_match_dt0, null);
         $this->assertNotNull($translator_ref01_data_dt0_loaded);
 
     }
@@ -87,7 +85,6 @@ function translator_basic_setup($extra)
         "TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID" => $idmap,
         "TRANSLATEFUNNYLANGUAGES_TEST_LIVE" => "FALSE",
         "TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN" => "FALSE",
-        "TRANSLATEFUNNYLANGUAGES_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -99,7 +96,6 @@ function translator_basic_setup($extra)
     if ($env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["TRANSLATEFUNNYLANGUAGES_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://api.funtranslations.com',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -89,7 +85,8 @@ class Config {
                     "name": "translator",
                     "orig": "translator",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -127,7 +124,8 @@ class Config {
                     "name": "translator",
                     "orig": "translator",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ],
                 "query": [

@@ -45,15 +45,12 @@ class TestTranslatorEntity:
             vs.getpath(setup["data"], "new.translator"), "translator_ref01"))
         translator_ref01_data["translator"] = setup["idmap"]["translator01"]
 
-        translator_ref01_data_result, err = translator_ref01_ent.create(translator_ref01_data, None)
-        assert err is None
-        translator_ref01_data = helpers.to_map(translator_ref01_data_result)
+        translator_ref01_data = helpers.to_map(translator_ref01_ent.create(translator_ref01_data, None))
         assert translator_ref01_data is not None
 
         # LOAD
         translator_ref01_match_dt0 = {}
-        translator_ref01_data_dt0_loaded, err = translator_ref01_ent.load(translator_ref01_match_dt0, None)
-        assert err is None
+        translator_ref01_data_dt0_loaded = translator_ref01_ent.load(translator_ref01_match_dt0, None)
         assert translator_ref01_data_dt0_loaded is not None
 
 
@@ -94,7 +91,6 @@ def _translator_basic_setup(extra):
         "TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID": idmap,
         "TRANSLATEFUNNYLANGUAGES_TEST_LIVE": "FALSE",
         "TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN": "FALSE",
-        "TRANSLATEFUNNYLANGUAGES_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -105,7 +101,6 @@ def _translator_basic_setup(extra):
     if env.get("TRANSLATEFUNNYLANGUAGES_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("TRANSLATEFUNNYLANGUAGES_APIKEY"),
             },
             extra or {},
         ])

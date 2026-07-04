@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -110,7 +109,7 @@ Alias for `TranslateFunnyLanguagesSDK.test()`.
 ## TranslatorEntity
 
 ```ts
-const translator = client.Translator()
+const translator = client.translator
 ```
 
 ### Fields
@@ -127,7 +126,7 @@ const translator = client.Translator()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Translator().create({
+const result = await client.translator.create({
 })
 ```
 
@@ -136,7 +135,7 @@ const result = await client.Translator().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Translator().load({ id: 'translator_id' })
+const result = await client.translator.load({ id: 'translator_id' })
 ```
 
 ### Common Methods
