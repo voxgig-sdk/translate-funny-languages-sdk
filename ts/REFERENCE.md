@@ -116,8 +116,8 @@ const translator = client.Translator()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | ``$OBJECT`` | No |  |
-| `success` | ``$OBJECT`` | No |  |
+| `content` | `Record<string, any>` | No |  |
+| `success` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -135,7 +135,7 @@ const result = await client.Translator().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Translator().load({ id: 'translator_id' })
+const result = await client.Translator().load()
 ```
 
 ### Common Methods

@@ -90,8 +90,8 @@ local translator = client:Translator(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | ``$OBJECT`` | No |  |
-| `success` | ``$OBJECT`` | No |  |
+| `content` | `table` | No |  |
+| `success` | `table` | No |  |
 
 ### Operations
 
@@ -109,7 +109,7 @@ local result, err = client:Translator():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Translator():load({ id = "translator_id" })
+local result, err = client:Translator():load()
 ```
 
 ### Common Methods

@@ -8,7 +8,7 @@ Complete API reference for the TranslateFunnyLanguages Python SDK.
 ### Constructor
 
 ```python
-from translate-funny-languages_sdk import TranslateFunnyLanguagesSDK
+from translatefunnylanguages_sdk import TranslateFunnyLanguagesSDK
 
 client = TranslateFunnyLanguagesSDK(options)
 ```
@@ -87,8 +87,8 @@ translator = client.Translator()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | ``$OBJECT`` | No |  |
-| `success` | ``$OBJECT`` | No |  |
+| `content` | `dict` | No |  |
+| `success` | `dict` | No |  |
 
 ### Operations
 
@@ -106,7 +106,7 @@ result = client.Translator().create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Translator().load({"id": "translator_id"})
+result = client.Translator().load()
 ```
 
 ### Common Methods

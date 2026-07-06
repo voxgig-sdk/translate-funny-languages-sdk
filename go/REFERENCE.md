@@ -97,8 +97,8 @@ translator := client.Translator(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | ``$OBJECT`` | No |  |
-| `success` | ``$OBJECT`` | No |  |
+| `content` | `map[string]any` | No |  |
+| `success` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -116,7 +116,7 @@ result, err := client.Translator(nil).Create(map[string]any{
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Translator(nil).Load(map[string]any{"id": "translator_id"}, nil)
+result, err := client.Translator(nil).Load(nil, nil)
 ```
 
 ### Common Methods

@@ -221,7 +221,7 @@ class TranslateFunnyLanguagesSDK:
 
 
     def Translator(self, data=None) -> "TranslatorEntity":
-        """Entity factory: client.Translator().list({}) / client.Translator().load({"id": ...})."""
+        """Entity factory: client.Translator().list() / client.Translator().load({"id": ...})."""
         from entity.translator_entity import TranslatorEntity
         return TranslatorEntity(self, data)
 

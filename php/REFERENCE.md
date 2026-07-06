@@ -8,7 +8,7 @@ Complete API reference for the TranslateFunnyLanguages PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/translate-funny-languages_sdk.php';
+require_once __DIR__ . '/translatefunnylanguages_sdk.php';
 
 $client = new TranslateFunnyLanguagesSDK($options);
 ```
@@ -45,11 +45,11 @@ $client = TranslateFunnyLanguagesSDK::test();
 
 Create a new `TranslatorEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): TranslateFunnyLanguagesUtility`
 
 Return a copy of the SDK utility object.
 
@@ -92,8 +92,8 @@ $translator = $client->Translator();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | ``$OBJECT`` | No |  |
-| `success` | ``$OBJECT`` | No |  |
+| `content` | `array` | No |  |
+| `success` | `array` | No |  |
 
 ### Operations
 
@@ -111,24 +111,24 @@ $result = $client->Translator()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Translator()->load(["id" => "translator_id"]);
+$result = $client->Translator()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -137,7 +137,7 @@ Set the entity match criteria.
 Create a new `TranslatorEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

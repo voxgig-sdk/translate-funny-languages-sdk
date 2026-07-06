@@ -8,7 +8,7 @@ Complete API reference for the TranslateFunnyLanguages Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'translate-funny-languages_sdk'
+require_relative 'TranslateFunnyLanguages_sdk'
 
 client = TranslateFunnyLanguagesSDK.new(options)
 ```
@@ -93,8 +93,8 @@ translator = client.Translator
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | ``$OBJECT`` | No |  |
-| `success` | ``$OBJECT`` | No |  |
+| `content` | `Hash` | No |  |
+| `success` | `Hash` | No |  |
 
 ### Operations
 
@@ -112,7 +112,7 @@ result = client.Translator.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Translator.load({ "id" => "translator_id" })
+result = client.Translator.load()
 ```
 
 ### Common Methods
