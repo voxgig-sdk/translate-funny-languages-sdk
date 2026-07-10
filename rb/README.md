@@ -32,10 +32,12 @@ client = TranslateFunnyLanguagesSDK.new
 
 ### 3. Load a translator
 
+Translator is nested under translator, so provide the `translator`.
+
 ```ruby
 begin
   # load returns the bare Translator record (raises on error).
-  translator = client.Translator.load()
+  translator = client.Translator.load({ "translator" => "example_translator" })
   puts translator
 rescue => err
   warn "load failed: #{err}"
@@ -46,7 +48,7 @@ end
 
 ```ruby
 # create returns the bare created Translator record.
-created = client.Translator.create({ "translator" => "example" })
+created = client.Translator.create({ "translator" => "example_translator" })
 
 ```
 
@@ -277,13 +279,14 @@ Create an instance: `translator = client.Translator`
 
 ```ruby
 # load returns the bare Translator record (raises on error).
-translator = client.Translator.load()
+translator = client.Translator.load({ "translator" => "translator" })
 ```
 
 #### Example: Create
 
 ```ruby
 translator = client.Translator.create({
+  "translator" => "example_translator", # String
 })
 ```
 

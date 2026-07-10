@@ -51,14 +51,14 @@ func main() {
     client := sdk.New()
 
     // Load a single translator — the value is the loaded record.
-    translator, err := client.Translator(nil).Load(nil, nil)
+    translator, err := client.Translator(nil).Load(map[string]any{"translator": "example_translator"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(translator)
 
     // Create a translator.
-    created, err := client.Translator(nil).Create(map[string]any{"translator": "example"}, nil)
+    created, err := client.Translator(nil).Create(map[string]any{"translator": "example_translator"}, nil)
     if err != nil {
         panic(err)
     }
@@ -286,8 +286,8 @@ Create an instance: `translator := client.Translator(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -299,7 +299,7 @@ Create an instance: `translator := client.Translator(nil)`
 #### Example: Load
 
 ```go
-translator, err := client.Translator(nil).Load(nil, nil)
+translator, err := client.Translator(nil).Load(map[string]any{"translator": "translator"}, nil)
 if err != nil {
     panic(err)
 }
@@ -310,7 +310,12 @@ fmt.Println(translator) // the loaded record
 
 ```go
 result, err := client.Translator(nil).Create(map[string]any{
+    "translator": "example_translator",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 

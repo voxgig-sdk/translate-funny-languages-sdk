@@ -38,11 +38,12 @@ client = TranslateFunnyLanguagesSDK()
 
 ### 3. Load a translator
 
+Translator is nested under translator, so provide the `translator`.
 `load()` returns the bare record (a `dict`) and raises on error.
 
 ```python
 try:
-    translator = client.Translator().load()
+    translator = client.Translator().load({"translator": "example_translator"})
     print(translator)
 except Exception as err:
     print(f"load failed: {err}")
@@ -52,7 +53,7 @@ except Exception as err:
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Translator().create({"translator": "example"})
+created = client.Translator().create({"translator": "example_translator"})
 
 ```
 
@@ -282,13 +283,14 @@ Create an instance: `translator = client.Translator()`
 #### Example: Load
 
 ```python
-translator = client.Translator().load()
+translator = client.Translator().load({"translator": "translator"})
 ```
 
 #### Example: Create
 
 ```python
 translator = client.Translator().create({
+    "translator": "example_translator",  # str
 })
 ```
 

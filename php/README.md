@@ -33,10 +33,12 @@ $client = new TranslateFunnyLanguagesSDK();
 
 ### 3. Load a translator
 
+Translator is nested under translator, so provide the `translator`.
+
 ```php
 try {
     // load() returns the bare Translator record (throws on error).
-    $translator = $client->Translator()->load();
+    $translator = $client->Translator()->load(["translator" => "example_translator"]);
     print_r($translator);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -47,7 +49,7 @@ try {
 
 ```php
 // create() returns the bare created Translator record.
-$created = $client->Translator()->create(["translator" => "example"]);
+$created = $client->Translator()->create(["translator" => "example_translator"]);
 
 ```
 
@@ -287,13 +289,14 @@ Create an instance: `$translator = $client->Translator();`
 
 ```php
 // load() returns the bare Translator record (throws on error).
-$translator = $client->Translator()->load();
+$translator = $client->Translator()->load(["translator" => "translator"]);
 ```
 
 #### Example: Create
 
 ```php
 $translator = $client->Translator()->create([
+    "translator" => null, // string
 ]);
 ```
 

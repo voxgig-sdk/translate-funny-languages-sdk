@@ -15,9 +15,9 @@ main: {
           url: "https://api.funtranslations.com"
         }
       ]
+      summary: "Translate english to funny languages like Morse Code, Sith or Valyrian"
       title: "Translate Funny Languages"
       version: "1.0.0"
+      website: "https://funtranslations.com"
     }
   }
-}
-

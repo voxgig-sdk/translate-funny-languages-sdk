@@ -98,6 +98,7 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Translator().create({
+    "translator": "example_translator",  # str
 })
 ```
 
@@ -106,7 +107,7 @@ result = client.Translator().create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Translator().load()
+result = client.Translator().load({"translator": "translator"})
 ```
 
 ### Common Methods

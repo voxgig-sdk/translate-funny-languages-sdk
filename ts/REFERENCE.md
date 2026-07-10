@@ -127,6 +127,7 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Translator().create({
+  translator: 'example_translator',
 })
 ```
 
@@ -135,7 +136,7 @@ const result = await client.Translator().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Translator().load()
+const result = await client.Translator().load({ translator: 'translator' })
 ```
 
 ### Common Methods

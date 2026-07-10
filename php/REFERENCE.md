@@ -103,6 +103,7 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Translator()->create([
+  "translator" => null, // string
 ]);
 ```
 
@@ -111,7 +112,7 @@ $result = $client->Translator()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Translator()->load();
+$result = $client->Translator()->load(["translator" => "translator"]);
 ```
 
 ### Common Methods

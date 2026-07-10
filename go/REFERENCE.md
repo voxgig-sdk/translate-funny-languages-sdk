@@ -91,6 +91,7 @@ same parameters as `Direct()`.
 
 ```go
 translator := client.Translator(nil)
+fmt.Println(translator.GetName()) // "translator"
 ```
 
 ### Fields
@@ -102,21 +103,30 @@ translator := client.Translator(nil)
 
 ### Operations
 
+#### `Load(reqmatch, ctrl map[string]any) (any, error)`
+
+Load a single entity matching the given criteria.
+
+```go
+result, err := client.Translator(nil).Load(map[string]any{"translator": "translator"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
 #### `Create(reqdata, ctrl map[string]any) (any, error)`
 
 Create a new entity with the given data.
 
 ```go
 result, err := client.Translator(nil).Create(map[string]any{
+    "translator": "example_translator",
 }, nil)
-```
-
-#### `Load(reqmatch, ctrl map[string]any) (any, error)`
-
-Load a single entity matching the given criteria.
-
-```go
-result, err := client.Translator(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

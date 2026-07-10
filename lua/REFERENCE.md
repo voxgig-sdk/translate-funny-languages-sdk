@@ -101,6 +101,7 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Translator():create({
+  translator = --[[ string ]],
 })
 ```
 
@@ -109,7 +110,7 @@ local result, err = client:Translator():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Translator():load()
+local result, err = client:Translator():load({ translator = "translator" })
 ```
 
 ### Common Methods

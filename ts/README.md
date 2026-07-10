@@ -35,11 +35,14 @@ const client = new TranslateFunnyLanguagesSDK()
 
 ### 3. Load a translator
 
+Translator is nested under translator, so provide the `translator`.
 `load()` returns the entity directly and throws on failure:
 
 ```ts
 try {
-  const translator = await client.Translator().load()
+  const translator = await client.Translator().load({
+    translator: 'example_translator',
+  })
   console.log(translator)
 } catch (err) {
   console.error('load failed:', err)
@@ -328,13 +331,14 @@ Create an instance: `const translator = client.Translator()`
 #### Example: Load
 
 ```ts
-const translator = await client.Translator().load()
+const translator = await client.Translator().load({ translator: 'translator' })
 ```
 
 #### Example: Create
 
 ```ts
 const translator = await client.Translator().create({
+  translator: 'example_translator',
 })
 ```
 

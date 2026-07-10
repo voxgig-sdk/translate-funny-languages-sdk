@@ -104,6 +104,7 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Translator.create({
+  "translator" => "example_translator", # String
 })
 ```
 
@@ -112,7 +113,7 @@ result = client.Translator.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Translator.load()
+result = client.Translator.load({ "translator" => "translator" })
 ```
 
 ### Common Methods
