@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- TranslateFunnyLanguages SDK exists test
 
 local sdk = require("translate-funny-languages_sdk")
 
