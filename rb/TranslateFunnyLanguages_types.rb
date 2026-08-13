@@ -10,13 +10,13 @@
 
 # Translator entity data model.
 #
-# @!attribute [rw] content
+# @!attribute [rw] contents
 #   @return [Hash, nil]
 #
 # @!attribute [rw] success
 #   @return [Hash, nil]
 Translator = Struct.new(
-  :content,
+  :contents,
   :success,
   keyword_init: true
 )
@@ -34,8 +34,16 @@ TranslatorLoadMatch = Struct.new(
 #
 # @!attribute [rw] translator
 #   @return [String]
+#
+# @!attribute [rw] contents
+#   @return [Hash, nil]
+#
+# @!attribute [rw] success
+#   @return [Hash, nil]
 TranslatorCreateData = Struct.new(
   :translator,
+  :contents,
+  :success,
   keyword_init: true
 )
 

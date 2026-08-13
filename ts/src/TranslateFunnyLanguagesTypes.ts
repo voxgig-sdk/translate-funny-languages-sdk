@@ -6,7 +6,7 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Translator {
-  content?: Record<string, any>
+  contents?: Record<string, any>
   success?: Record<string, any>
 }
 
@@ -16,5 +16,7 @@ export interface TranslatorLoadMatch {
 
 export interface TranslatorCreateData {
   translator: string
+  contents?: Record<string, any>
+  success?: Record<string, any>
 }
 

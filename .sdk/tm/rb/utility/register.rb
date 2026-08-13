@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ TranslateFunnyLanguagesUtility.registrar = ->(u) {
   u.prepare_params = TranslateFunnyLanguagesUtilities::PrepareParams
   u.prepare_path = TranslateFunnyLanguagesUtilities::PreparePath
   u.prepare_query = TranslateFunnyLanguagesUtilities::PrepareQuery
+  u.graphql_body = TranslateFunnyLanguagesUtilities::GraphqlBody
+  u.graphql_errors = TranslateFunnyLanguagesUtilities::GraphqlErrors
   u.result_basic = TranslateFunnyLanguagesUtilities::ResultBasic
   u.result_body = TranslateFunnyLanguagesUtilities::ResultBody
   u.result_headers = TranslateFunnyLanguagesUtilities::ResultHeaders

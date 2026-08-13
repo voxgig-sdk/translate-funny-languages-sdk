@@ -39,7 +39,7 @@ client = TranslateFunnyLanguagesSDK()
 ### 3. Load a translator
 
 Translator is nested under translator, so provide the `translator`.
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -52,7 +52,7 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
+# Create — returns the ENTITY (call data_get() for the record)
 created = client.Translator().create({"translator": "example_translator"})
 
 ```
@@ -64,7 +64,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    translator = client.Translator().load()
+    translator = client.Translator().load({"translator": "example"})
     print(translator)
 except Exception as err:
     print(f"load failed: {err}")
@@ -131,8 +131,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = TranslateFunnyLanguagesSDK.test()
 
-# Entity ops return the bare record and raise on error.
-translator = client.Translator().load()
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+translator = client.Translator().load({"translator": "example"})
 # translator contains the mock response record
 ```
 
@@ -228,7 +229,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -250,7 +251,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `content` |  |
+| `contents` |  |
 | `success` |  |
 
 Operations: Create, Load.
@@ -277,7 +278,7 @@ Create an instance: `translator = client.Translator()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `dict` |  |
+| `contents` | `dict` |  |
 | `success` | `dict` |  |
 
 #### Example: Load
@@ -371,7 +372,7 @@ stores the returned data and match criteria internally.
 
 ```python
 translator = client.Translator()
-translator.load()
+translator.load({"translator": "example"})
 
 # translator.data_get() now returns the translator data from the last load
 # translator.match_get() returns the last match criteria

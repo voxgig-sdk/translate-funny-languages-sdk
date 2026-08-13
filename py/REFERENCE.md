@@ -87,7 +87,7 @@ translator = client.Translator()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `dict` | No |  |
+| `contents` | `dict` | No |  |
 | `success` | `dict` | No |  |
 
 ### Operations

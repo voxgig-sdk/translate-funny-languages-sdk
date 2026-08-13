@@ -7,7 +7,7 @@
 -- edit by hand.
 
 ---@class Translator
----@field content? table
+---@field contents? table
 ---@field success? table
 
 ---@class TranslatorLoadMatch
@@ -15,6 +15,8 @@
 
 ---@class TranslatorCreateData
 ---@field translator string
+---@field contents? table
+---@field success? table
 
 local M = {}
 

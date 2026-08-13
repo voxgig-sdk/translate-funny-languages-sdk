@@ -2,19 +2,19 @@
   "existing": {
     "translator": {
       "TRANSLATOR00": {
-        "content": {},
+        "contents": {},
         "success": {},
         "translator": "TRANSLATOR01",
         "id": "TRANSLATOR00"
       },
       "TRANSLATOR01": {
-        "content": {},
+        "contents": {},
         "success": {},
         "translator": "TRANSLATOR01",
         "id": "TRANSLATOR01"
       },
       "TRANSLATOR02": {
-        "content": {},
+        "contents": {},
         "success": {},
         "translator": "TRANSLATOR01",
         "id": "TRANSLATOR02"
@@ -24,7 +24,7 @@
   "new": {
     "translator": {
       "translator_ref01": {
-        "content": {},
+        "contents": {},
         "success": {}
       }
     }

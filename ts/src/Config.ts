@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'TranslateFunnyLanguages',
   }
 
 
@@ -56,7 +56,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "content",
+          "name": "contents",
           "req": false,
           "type": "`$OBJECT`",
           "index$": 0
@@ -90,6 +90,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "POST",
               "orig": "/translate/{translator}.json",
               "parts": [
@@ -139,6 +140,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/translate/{translator}.json",
               "parts": [

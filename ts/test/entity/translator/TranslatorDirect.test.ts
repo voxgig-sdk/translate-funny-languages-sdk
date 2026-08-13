@@ -19,11 +19,15 @@ import {
 describe('TranslatorDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when TRANSLATEFUNNYLANGUAGES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('TRANSLATEFUNNYLANGUAGES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new TranslateFunnyLanguagesSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -72,17 +76,17 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID': {},
-    'TRANSLATEFUNNYLANGUAGES_TEST_LIVE': 'FALSE',
+    'TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID': {},
+    'TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE': 'FALSE',
   })
 
-  const live = 'TRUE' === env.TRANSLATEFUNNYLANGUAGES_TEST_LIVE
+  const live = 'TRUE' === env.TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE
 
   if (live) {
     const client = new TranslateFunnyLanguagesSDK({
     })
 
-    let idmap: any = env['TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID']
+    let idmap: any = env['TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

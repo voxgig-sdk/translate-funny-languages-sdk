@@ -116,7 +116,7 @@ const translator = client.Translator()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `Record<string, any>` | No |  |
+| `contents` | `Record<string, any>` | No |  |
 | `success` | `Record<string, any>` | No |  |
 
 ### Operations

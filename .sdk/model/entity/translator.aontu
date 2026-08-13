@@ -6,7 +6,7 @@ main: kit: entity: translator: {
 
   fields: [
     {
-      name: "content"
+      name: "contents"
       req: false
       type: "`$OBJECT`"
     }

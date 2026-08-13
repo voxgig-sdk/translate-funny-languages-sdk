@@ -65,11 +65,11 @@ function translator_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID" => [],
-        "TRANSLATEFUNNYLANGUAGES_TEST_LIVE" => "FALSE",
+        "TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID" => [],
+        "TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] === "TRUE";
+    $live = $env["TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

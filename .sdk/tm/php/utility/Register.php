@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ TranslateFunnyLanguagesUtility::setRegistrar(function (TranslateFunnyLanguagesUt
     $u->prepare_params = [TranslateFunnyLanguagesPrepareParams::class, 'call'];
     $u->prepare_path = [TranslateFunnyLanguagesPreparePath::class, 'call'];
     $u->prepare_query = [TranslateFunnyLanguagesPrepareQuery::class, 'call'];
+    $u->graphql_body = [TranslateFunnyLanguagesGraphql::class, 'body'];
+    $u->graphql_errors = [TranslateFunnyLanguagesGraphql::class, 'errors'];
     $u->result_basic = [TranslateFunnyLanguagesResultBasic::class, 'call'];
     $u->result_body = [TranslateFunnyLanguagesResultBody::class, 'call'];
     $u->result_headers = [TranslateFunnyLanguagesResultHeaders::class, 'call'];

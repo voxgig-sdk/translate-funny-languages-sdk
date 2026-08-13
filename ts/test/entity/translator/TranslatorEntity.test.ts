@@ -26,8 +26,8 @@ import {
 describe('TranslatorEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when TRANSLATEFUNNYLANGUAGES_TEST_LIVE=TRUE.
-  afterEach(liveDelay('TRANSLATEFUNNYLANGUAGES_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = TranslateFunnyLanguagesSDK.test()
@@ -63,7 +63,7 @@ describe('TranslatorEntity', async () => {
     let translator_ref01_data = setup.data.new.translator['translator_ref01']
     translator_ref01_data['translator'] = setup.idmap['translator01']
 
-    translator_ref01_data = await translator_ref01_ent.create(translator_ref01_data)
+    translator_ref01_data = (await translator_ref01_ent.create(translator_ref01_data)).data()
     assert(null != translator_ref01_data)
 
 

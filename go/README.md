@@ -73,7 +73,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-translator, err := client.Translator(nil).Load(nil, nil)
+translator, err := client.Translator(nil).Load(map[string]any{"translator": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -143,7 +143,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 translator, err := client.Translator(nil).Load(
-    nil, nil,
+    map[string]any{"translator": "example"}, nil,
 )
 if err != nil {
     panic(err)
@@ -266,7 +266,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"content"` |  |
+| `"contents"` |  |
 | `"success"` |  |
 
 Operations: Create, Load.
@@ -293,7 +293,7 @@ Create an instance: `translator := client.Translator(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `map[string]any` |  |
+| `contents` | `map[string]any` |  |
 | `success` | `map[string]any` |  |
 
 #### Example: Load
@@ -393,7 +393,7 @@ stores the returned data and match criteria internally.
 
 ```go
 translator := client.Translator(nil)
-translator.Load(nil, nil)
+translator.Load(map[string]any{"translator": "example"}, nil)
 
 // translator.Data() now returns the translator data from the last load
 // translator.Match() returns the last match criteria

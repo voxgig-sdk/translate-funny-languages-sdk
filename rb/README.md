@@ -36,7 +36,7 @@ Translator is nested under translator, so provide the `translator`.
 
 ```ruby
 begin
-  # load returns the bare Translator record (raises on error).
+  # load returns the ENTITY — call data_get for the Translator record (raises on error).
   translator = client.Translator.load({ "translator" => "example_translator" })
   puts translator
 rescue => err
@@ -47,7 +47,7 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created Translator record.
+# create returns the ENTITY — call data_get for the created Translator record.
 created = client.Translator.create({ "translator" => "example_translator" })
 
 ```
@@ -59,7 +59,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  translator = client.Translator.load()
+  translator = client.Translator.load({ "translator" => "example" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -127,8 +127,9 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = TranslateFunnyLanguagesSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-translator = client.Translator.load()
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+translator = client.Translator.load({ "translator" => "example" })
 puts translator
 ```
 
@@ -245,7 +246,7 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `content` |  |
+| `contents` |  |
 | `success` |  |
 
 Operations: Create, Load.
@@ -272,13 +273,13 @@ Create an instance: `translator = client.Translator`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `Hash` |  |
+| `contents` | `Hash` |  |
 | `success` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Translator record (raises on error).
+# load returns the ENTITY — call data_get for the Translator record (raises on error).
 translator = client.Translator.load({ "translator" => "translator" })
 ```
 
@@ -368,7 +369,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 translator = client.Translator
-translator.load()
+translator.load({ "translator" => "example" })
 
 # translator.data_get now returns the translator data from the last load
 # translator.match_get returns the last match criteria

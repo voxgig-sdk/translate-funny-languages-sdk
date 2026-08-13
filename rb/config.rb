@@ -27,7 +27,7 @@ module TranslateFunnyLanguagesConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "content",
+              "name" => "contents",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 0,
@@ -61,6 +61,7 @@ module TranslateFunnyLanguagesConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/translate/{translator}.json",
                   "parts" => [
@@ -110,6 +111,7 @@ module TranslateFunnyLanguagesConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/translate/{translator}.json",
                   "parts" => [

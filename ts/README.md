@@ -52,7 +52,7 @@ try {
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created Translator
+// Create — returns the created Translator ENTITY (.data() for the record)
 const created = await client.Translator().create({
   translator: 'example_translator',
 })
@@ -66,7 +66,7 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const translator = await client.Translator().load()
+  const translator = await client.Translator().load({ translator: "example" })
   console.log(translator)
 } catch (err) {
   console.error('load failed:', err)
@@ -133,8 +133,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = TranslateFunnyLanguagesSDK.test()
 
-const translator = await client.Translator().load()
-// translator is a bare entity populated with mock response data
+const translator = await client.Translator().load({ translator: 'example_translator' })
+// translator is the entity, populated with mock response data
+// — call translator.data() for the record itself
 console.log(translator)
 ```
 
@@ -153,7 +154,7 @@ Entity instances remember their last match and data:
 const entity = client.Translator()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ translator: 'example_translator' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -298,7 +299,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `content` |  |
+| `contents` |  |
 | `success` |  |
 
 Operations: create, load.
@@ -325,7 +326,7 @@ Create an instance: `const translator = client.Translator()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `Record<string, any>` |  |
+| `contents` | `Record<string, any>` |  |
 | `success` | `Record<string, any>` |  |
 
 #### Example: Load
@@ -413,7 +414,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const translator = client.Translator()
-await translator.load()
+await translator.load({ translator: "example" })
 
 // translator.data() now returns the translator data from the last `load`
 // translator.match() returns the last match criteria

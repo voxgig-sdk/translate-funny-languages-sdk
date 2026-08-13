@@ -98,7 +98,7 @@ fmt.Println(translator.GetName()) // "translator"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `map[string]any` | No |  |
+| `contents` | `map[string]any` | No |  |
 | `success` | `map[string]any` | No |  |
 
 ### Operations

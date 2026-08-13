@@ -93,7 +93,7 @@ translator = client.Translator
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `Hash` | No |  |
+| `contents` | `Hash` | No |  |
 | `success` | `Hash` | No |  |
 
 ### Operations

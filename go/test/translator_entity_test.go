@@ -44,7 +44,7 @@ func TestTranslatorEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -59,7 +59,7 @@ func TestTranslatorEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		translatorRef01Data = core.ToMapAny(translatorRef01DataResult)
+		translatorRef01Data = core.ToMapAny(entityData(translatorRef01DataResult))
 		if translatorRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -114,21 +114,21 @@ func translatorBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID")
+	entidEnvRaw := os.Getenv("TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID": idmap,
-		"TRANSLATEFUNNYLANGUAGES_TEST_LIVE":      "FALSE",
-		"TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN":   "FALSE",
+		"TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID": idmap,
+		"TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE":      "FALSE",
+		"TRANSLATE_FUNNY_LANGUAGES_TEST_EXPLAIN":   "FALSE",
 	})
 
-	idmapResolved := core.ToMapAny(env["TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID"])
+	idmapResolved := core.ToMapAny(env["TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] == "TRUE" {
+	if env["TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
 			},
@@ -137,13 +137,13 @@ func translatorBasicSetup(extra map[string]any) *entityTestSetup {
 		client = sdk.NewTranslateFunnyLanguagesSDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] == "TRUE"
+	live := env["TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["TRANSLATE_FUNNY_LANGUAGES_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

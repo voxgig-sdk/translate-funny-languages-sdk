@@ -16,11 +16,11 @@
 import pytest
 
 from translatefunnylanguages_sdk import TranslateFunnyLanguagesSDK
-from core.error import TranslateFunnyLanguagesError
-from core.result import TranslateFunnyLanguagesResult
-from core.response import TranslateFunnyLanguagesResponse
-from core.spec import TranslateFunnyLanguagesSpec
-from feature.base_feature import TranslateFunnyLanguagesBaseFeature
+from translatefunnylanguages_sdk.core.error import TranslateFunnyLanguagesError
+from translatefunnylanguages_sdk.core.result import TranslateFunnyLanguagesResult
+from translatefunnylanguages_sdk.core.response import TranslateFunnyLanguagesResponse
+from translatefunnylanguages_sdk.core.spec import TranslateFunnyLanguagesSpec
+from translatefunnylanguages_sdk.feature.base_feature import TranslateFunnyLanguagesBaseFeature
 
 
 def _client():

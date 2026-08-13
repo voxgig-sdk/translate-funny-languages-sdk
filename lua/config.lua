@@ -26,7 +26,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "content",
+            ["name"] = "contents",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 0,
@@ -60,6 +60,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/translate/{translator}.json",
                 ["parts"] = {
@@ -109,6 +110,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/translate/{translator}.json",
                 ["parts"] = {

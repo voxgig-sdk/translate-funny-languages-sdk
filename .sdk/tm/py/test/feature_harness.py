@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import TranslateFunnyLanguagesControl
-from core.error import TranslateFunnyLanguagesError
-from core.result import TranslateFunnyLanguagesResult
-from core.spec import TranslateFunnyLanguagesSpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import TranslateFunnyLanguagesControl
+from projectname_sdk.core.error import TranslateFunnyLanguagesError
+from projectname_sdk.core.result import TranslateFunnyLanguagesResult
+from projectname_sdk.core.spec import TranslateFunnyLanguagesSpec
 
 
 # True when this SDK was generated with the named feature.

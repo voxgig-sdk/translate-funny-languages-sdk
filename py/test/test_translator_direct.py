@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from translatefunnylanguages_sdk.utility.voxgig_struct import voxgig_struct as vs
 from translatefunnylanguages_sdk import TranslateFunnyLanguagesSDK
-from core import helpers
+from translatefunnylanguages_sdk.core import helpers
 from test import runner
 
 
@@ -56,11 +56,11 @@ def _translator_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID": {},
-        "TRANSLATEFUNNYLANGUAGES_TEST_LIVE": "FALSE",
+        "TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID": {},
+        "TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("TRANSLATEFUNNYLANGUAGES_TEST_LIVE") == "TRUE"
+    live = env.get("TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

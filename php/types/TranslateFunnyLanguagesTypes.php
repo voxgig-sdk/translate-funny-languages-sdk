@@ -15,7 +15,7 @@ declare(strict_types=1);
 /** Translator entity data model. */
 class Translator
 {
-    public ?array $content = null;
+    public ?array $contents = null;
     public ?array $success = null;
 }
 
@@ -29,5 +29,7 @@ class TranslatorLoadMatch
 class TranslatorCreateData
 {
     public string $translator;
+    public ?array $contents = null;
+    public ?array $success = null;
 }
 

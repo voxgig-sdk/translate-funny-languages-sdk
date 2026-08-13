@@ -92,7 +92,7 @@ $translator = $client->Translator();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `array` | No |  |
+| `contents` | `array` | No |  |
 | `success` | `array` | No |  |
 
 ### Operations

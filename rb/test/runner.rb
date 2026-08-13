@@ -23,8 +23,8 @@ module TranslateFunnyLanguagesTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("TRANSLATEFUNNYLANGUAGES_TEST_LIVE")
-    override = getenv("TRANSLATEFUNNYLANGUAGES_TEST_OVERRIDE")
+    live = getenv("TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE")
+    override = getenv("TRANSLATE_FUNNY_LANGUAGES_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module TranslateFunnyLanguagesTestRunner
       end
     end
 
-    explain = getenv("TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN")
-    m["TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("TRANSLATE_FUNNY_LANGUAGES_TEST_EXPLAIN")
+    m["TRANSLATE_FUNNY_LANGUAGES_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

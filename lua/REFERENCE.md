@@ -90,7 +90,7 @@ local translator = client:Translator(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `table` | No |  |
+| `contents` | `table` | No |  |
 | `success` | `table` | No |  |
 
 ### Operations

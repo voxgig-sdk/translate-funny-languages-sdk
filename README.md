@@ -23,7 +23,7 @@ support (`load`, `create`):
 
 ```ts
 const client = new TranslateFunnyLanguagesSDK()
-const translator = await client.Translator().load()
+const translator = await client.Translator().load({ translator: "example" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = TranslateFunnyLanguagesSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = TranslateFunnyLanguagesSDK.test({
+  entity: {
+    translator: {
+      test01: { id: 'test01', translator: 'example_translator' },
+    },
+  },
+})
 const translator = await client.Translator().load({ translator: 'example_translator' })
-// translator is a bare Translator populated with mock data
+// translator is the Translator entity, populated with mock data
+// — call translator.data() for the record itself
 console.log(translator)
 ```
 
@@ -185,7 +194,7 @@ require_once 'translatefunnylanguages_sdk.php';
 $client = new TranslateFunnyLanguagesSDK();
 
 
-// Load a specific translator (returns the bare record; throws on error)
+// Load a specific translator (returns the ENTITY; call data_get() for the record; throws on error)
 $translator = $client->Translator()->load(["translator" => "example_translator"]);
 print_r($translator);
 ```
@@ -216,7 +225,7 @@ require_relative "TranslateFunnyLanguages_sdk"
 client = TranslateFunnyLanguagesSDK.new
 
 
-# Load a specific translator (returns the bare record; raises on error)
+# Load a specific translator (returns the ENTITY; call data_get for the record)
 translator = client.Translator.load({ "translator" => "example_translator" })
 puts translator
 ```
@@ -350,6 +359,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://api.funtranslations.com/](https://api.funtranslations.com/)
 

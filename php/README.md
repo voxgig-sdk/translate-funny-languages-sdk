@@ -37,7 +37,7 @@ Translator is nested under translator, so provide the `translator`.
 
 ```php
 try {
-    // load() returns the bare Translator record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Translator record (throws on error).
     $translator = $client->Translator()->load(["translator" => "example_translator"]);
     print_r($translator);
 } catch (\Throwable $err) {
@@ -48,7 +48,7 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created Translator record.
+// create() returns the ENTITY — call data_get() for the created Translator record.
 $created = $client->Translator()->create(["translator" => "example_translator"]);
 
 ```
@@ -61,7 +61,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $translator = $client->Translator()->load();
+    $translator = $client->Translator()->load(["translator" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -133,8 +133,9 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = TranslateFunnyLanguagesSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$translator = $client->Translator()->load();
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$translator = $client->Translator()->load(["translator" => "example"]);
 print_r($translator);
 ```
 
@@ -233,7 +234,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -255,7 +256,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `content` |  |
+| `contents` |  |
 | `success` |  |
 
 Operations: Create, Load.
@@ -282,13 +283,13 @@ Create an instance: `$translator = $client->Translator();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `array` |  |
+| `contents` | `array` |  |
 | `success` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Translator record (throws on error).
+// load() returns the ENTITY — call data_get() for the Translator record (throws on error).
 $translator = $client->Translator()->load(["translator" => "translator"]);
 ```
 
@@ -378,7 +379,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $translator = $client->Translator();
-$translator->load();
+$translator->load(["translator" => "example"]);
 
 // $translator->data_get() now returns the translator data from the last load
 // $translator->match_get() returns the last match criteria

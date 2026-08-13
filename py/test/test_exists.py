@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# TranslateFunnyLanguages SDK exists test
 
 import pytest
 from translatefunnylanguages_sdk import TranslateFunnyLanguagesSDK

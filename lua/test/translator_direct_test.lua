@@ -60,11 +60,11 @@ function translator_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["TRANSLATEFUNNYLANGUAGES_TEST_TRANSLATOR_ENTID"] = {},
-    ["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] = "FALSE",
+    ["TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID"] = {},
+    ["TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["TRANSLATEFUNNYLANGUAGES_TEST_LIVE"] == "TRUE"
+  local live = env["TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

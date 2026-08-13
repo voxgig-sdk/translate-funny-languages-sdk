@@ -59,7 +59,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local translator, err = client:Translator():load()
+local translator, err = client:Translator():load({ translator = "example" })
 if err then error(err) end
 ```
 
@@ -117,7 +117,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Translator():load()
+local result, err = client:Translator():load({ translator = "example" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -237,7 +237,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `content` |  |
+| `contents` |  |
 | `success` |  |
 
 Operations: Create, Load.
@@ -264,7 +264,7 @@ Create an instance: `local translator = client:Translator(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `table` |  |
+| `contents` | `table` |  |
 | `success` | `table` |  |
 
 #### Example: Load
@@ -359,7 +359,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local translator = client:Translator()
-translator:load()
+translator:load({ translator = "example" })
 
 -- translator:data_get() now returns the translator data from the last load
 -- translator:match_get() returns the last match criteria

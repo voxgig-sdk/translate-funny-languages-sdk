@@ -43,8 +43,8 @@ class TranslateFunnyLanguagesTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('TRANSLATEFUNNYLANGUAGES_TEST_LIVE');
-        $override = self::getenv('TRANSLATEFUNNYLANGUAGES_TEST_OVERRIDE');
+        $live = self::getenv('TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE');
+        $override = self::getenv('TRANSLATE_FUNNY_LANGUAGES_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class TranslateFunnyLanguagesTestRunner
             }
         }
 
-        $explain = self::getenv('TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN');
+        $explain = self::getenv('TRANSLATE_FUNNY_LANGUAGES_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['TRANSLATEFUNNYLANGUAGES_TEST_EXPLAIN'] = $explain;
+            $m['TRANSLATE_FUNNY_LANGUAGES_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;
