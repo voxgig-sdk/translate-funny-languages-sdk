@@ -40,7 +40,7 @@ class TranslateFunnyLanguagesSDK
         $utility = new TranslateFunnyLanguagesUtility();
         $this->_utility = $utility;
 
-        $config = TranslateFunnyLanguagesConfig::make_config();
+        $config = TranslateFunnyLanguagesConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

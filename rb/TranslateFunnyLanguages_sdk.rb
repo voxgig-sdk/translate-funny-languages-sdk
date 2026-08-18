@@ -28,7 +28,7 @@ class TranslateFunnyLanguagesSDK
     utility = TranslateFunnyLanguagesUtility.new
     @_utility = utility
 
-    config = TranslateFunnyLanguagesConfig.make_config
+    config = TranslateFunnyLanguagesConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
