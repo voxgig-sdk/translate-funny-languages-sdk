@@ -19,6 +19,9 @@ module TranslateFunnyLanguagesConfig
     {
       "main" => {
         "name" => "TranslateFunnyLanguages",
+        "slug" => "translate-funny-languages",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {

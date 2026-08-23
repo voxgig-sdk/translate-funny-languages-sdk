@@ -33,6 +33,9 @@ class TranslateFunnyLanguagesConfig
         return [
             "main" => [
                 "name" => "TranslateFunnyLanguages",
+                "slug" => "translate-funny-languages",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
