@@ -42,6 +42,7 @@ class TranslateFunnyLanguagesConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
