@@ -38,7 +38,7 @@ Translator is nested under translator, so provide the `translator`.
 ```php
 try {
     // load() returns the ENTITY — call data_get() for the Translator record (throws on error).
-    $translator = $client->Translator()->load(["translator" => "example_translator"]);
+    $translator = $client->Translator()->load(["translator" => "example_translator", "text" => "example_text"]);
     print_r($translator);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -61,7 +61,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $translator = $client->Translator()->load(["translator" => "example"]);
+    $translator = $client->Translator()->load(["translator" => "example", "text" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -135,7 +135,7 @@ $client = TranslateFunnyLanguagesSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$translator = $client->Translator()->load(["translator" => "example"]);
+$translator = $client->Translator()->load(["translator" => "example", "text" => "example"]);
 print_r($translator);
 ```
 
@@ -290,7 +290,7 @@ Create an instance: `$translator = $client->Translator();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Translator record (throws on error).
-$translator = $client->Translator()->load(["translator" => "translator"]);
+$translator = $client->Translator()->load(["translator" => "translator", "text" => "text"]);
 ```
 
 #### Example: Create
@@ -300,6 +300,29 @@ $translator = $client->Translator()->create([
     "translator" => null, // string
 ]);
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -379,7 +402,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $translator = $client->Translator();
-$translator->load(["translator" => "example"]);
+$translator->load(["translator" => "example", "text" => "example"]);
 
 // $translator->data_get() now returns the translator data from the last load
 // $translator->match_get() returns the last match criteria

@@ -14,6 +14,10 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
+> **Features:** `test` — opt-in,
+> inactive until switched on, and configured per client. See the Features
+> section of any SDK README below for what each one does.
+
 ## Entities, not endpoints
 
 This SDK exposes the API as a small set of **semantic entities** — Translator — that you
@@ -23,7 +27,7 @@ support (`load`, `create`):
 
 ```ts
 const client = new TranslateFunnyLanguagesSDK()
-const translator = await client.Translator().load({ translator: "example" })
+const translator = await client.Translator().load({ translator: "example", text: "example" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -47,7 +51,7 @@ const client = TranslateFunnyLanguagesSDK.test({
     },
   },
 })
-const translator = await client.Translator().load({ translator: 'example_translator' })
+const translator = await client.Translator().load({ translator: 'example_translator', text: 'example_text' })
 // translator is the Translator entity, populated with mock data
 // — call translator.data() for the record itself
 console.log(translator)
@@ -57,7 +61,7 @@ console.log(translator)
 
 ```python
 client = TranslateFunnyLanguagesSDK.test()
-translator = client.Translator().load({"translator": "example"})
+translator = client.Translator().load({"translator": "example", "text": "example"})
 print(translator)
 ```
 
@@ -68,7 +72,7 @@ print(translator)
 $client = TranslateFunnyLanguagesSDK::test([
     "entity" => ["translator" => ["test01" => []]],
 ]);
-$translator = $client->Translator()->load(["translator" => "example"]);
+$translator = $client->Translator()->load(["translator" => "example", "text" => "example"]);
 ```
 
 ### Golang
@@ -87,14 +91,14 @@ result, err := client.Translator(nil).Load(
 client = TranslateFunnyLanguagesSDK.test({
   "entity" => { "translator" => { "test01" => {} } },
 })
-translator = client.Translator.load({ "translator" => "example" })
+translator = client.Translator.load({ "translator" => "example", "text" => "example" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Translator():load({ translator = "example" })
+local result, err = client:Translator():load({ translator = "example", text = "example" })
 ```
 
 ## Packages
@@ -123,6 +127,7 @@ const client = new TranslateFunnyLanguagesSDK()
 // Load a specific translator (returns a Translator)
 const translator = await client.Translator().load({
   translator: 'example_translator',
+  text: 'example_text',
 })
 console.log(translator)
 ```
@@ -181,7 +186,7 @@ client = TranslateFunnyLanguagesSDK()
 
 
 # Load a specific translator (returns the record, raises on error)
-translator = client.Translator().load({"translator": "example_translator"})
+translator = client.Translator().load({"translator": "example_translator", "text": "example_text"})
 print(translator)
 ```
 
@@ -195,7 +200,7 @@ $client = new TranslateFunnyLanguagesSDK();
 
 
 // Load a specific translator (returns the ENTITY; call data_get() for the record; throws on error)
-$translator = $client->Translator()->load(["translator" => "example_translator"]);
+$translator = $client->Translator()->load(["translator" => "example_translator", "text" => "example_text"]);
 print_r($translator);
 ```
 
@@ -209,7 +214,7 @@ client := sdk.New()
 
 // Load a specific translator
 translator, err := client.Translator(nil).Load(
-    map[string]any{"translator": "example_translator"}, nil,
+    map[string]any{"translator": "example_translator", "text": "example_text"}, nil,
 )
 if err != nil {
     panic(err)
@@ -226,7 +231,7 @@ client = TranslateFunnyLanguagesSDK.new
 
 
 # Load a specific translator (returns the ENTITY; call data_get for the record)
-translator = client.Translator.load({ "translator" => "example_translator" })
+translator = client.Translator.load({ "translator" => "example_translator", "text" => "example_text" })
 puts translator
 ```
 
@@ -239,7 +244,7 @@ local client = sdk.new()
 
 
 -- Load a specific translator
-local translator, err = client:Translator():load({ translator = "example_translator" })
+local translator, err = client:Translator():load({ translator = "example_translator", text = "example_text" })
 print(translator)
 ```
 
@@ -345,6 +350,32 @@ forking the SDK.
 | **TestFeature** | In-memory mock transport for testing without a live server |
 
 Pass custom features via the `extend` option at construction time.
+
+## Customizing this SDK
+
+This repository contains its own generator (`.sdk/`), so the SDK is
+customizable without forking any upstream tool:
+
+- **The model** (`.sdk/model/`) declares everything this project owns:
+  package names, versions, active features, per-target settings. It is
+  written in [aontu](https://github.com/aontu-lang/aontu), a JSON-based
+  specification language designed for building ontologies: easy to edit
+  by hand, and files unify rather than override, so small declarations
+  compose into one model. Regeneration re-reads it every time.
+- **Templates** (`.sdk/tm/`) and **components** (`.sdk/src/cmp/`) are
+  the two layers of generation, copied into this repo: templates are the
+  literal per-language source, components generate the API-shaped parts.
+- **Regeneration merges.** By default, newly generated content is
+  three-way merged into existing files, so generator updates and local
+  edits usually converge without manual conflict handling. A project can
+  opt for plain overwrite instead.
+- **Custom features and entire custom targets** arrive through sdkgen
+  packages (`voxgig-sdkgen package add`), on the same rails as the
+  bundled languages, and `voxgig-sdkgen doctor` reports any drift from
+  what a resync would write.
+
+How-to: [customize and propagate templates](https://github.com/voxgig/sdkgen/blob/main/docs/how-to/customize-and-propagate-templates.md).
+The full story: [voxgig.com/sdk/custom](https://voxgig.com/sdk/custom).
 
 ## Per-language documentation
 

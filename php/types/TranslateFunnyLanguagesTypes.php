@@ -23,6 +23,7 @@ class Translator
 class TranslatorLoadMatch
 {
     public string $translator;
+    public string $text;
 }
 
 /** Request payload for Translator#create. */

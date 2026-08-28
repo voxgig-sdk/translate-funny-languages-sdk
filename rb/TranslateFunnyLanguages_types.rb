@@ -25,8 +25,12 @@ Translator = Struct.new(
 #
 # @!attribute [rw] translator
 #   @return [String]
+#
+# @!attribute [rw] text
+#   @return [String]
 TranslatorLoadMatch = Struct.new(
   :translator,
+  :text,
   keyword_init: true
 )
 

@@ -38,7 +38,7 @@ local client = sdk.new()
 Translator is nested under translator, so provide the `translator`.
 
 ```lua
-local translator, err = client:Translator():load({ translator = "example_translator" })
+local translator, err = client:Translator():load({ translator = "example_translator", text = "example_text" })
 if err then error(err) end
 print(translator)
 ```
@@ -59,7 +59,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local translator, err = client:Translator():load({ translator = "example" })
+local translator, err = client:Translator():load({ translator = "example", text = "example" })
 if err then error(err) end
 ```
 
@@ -117,7 +117,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Translator():load({ translator = "example" })
+local result, err = client:Translator():load({ translator = "example", text = "example" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -270,7 +270,7 @@ Create an instance: `local translator = client:Translator(nil)`
 #### Example: Load
 
 ```lua
-local translator, err = client:Translator():load({ translator = "translator" })
+local translator, err = client:Translator():load({ translator = "translator", text = "text" })
 ```
 
 #### Example: Create
@@ -280,6 +280,29 @@ local translator, err = client:Translator():create({
   translator = "example_translator", -- string
 })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -359,7 +382,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local translator = client:Translator()
-translator:load({ translator = "example" })
+translator:load({ translator = "example", text = "example" })
 
 -- translator:data_get() now returns the translator data from the last load
 -- translator:match_get() returns the last match criteria

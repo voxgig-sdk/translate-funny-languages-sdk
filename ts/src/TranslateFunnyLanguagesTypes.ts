@@ -12,6 +12,7 @@ export interface Translator {
 
 export interface TranslatorLoadMatch {
   translator: string
+  text: string
 }
 
 export interface TranslatorCreateData {

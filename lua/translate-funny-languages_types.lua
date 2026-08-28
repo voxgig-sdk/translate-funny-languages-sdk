@@ -12,6 +12,7 @@
 
 ---@class TranslatorLoadMatch
 ---@field translator string
+---@field text string
 
 ---@class TranslatorCreateData
 ---@field translator string

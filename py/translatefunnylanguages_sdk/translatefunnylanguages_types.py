@@ -23,6 +23,7 @@ class Translator(TypedDict, total=False):
 
 class TranslatorLoadMatch(TypedDict):
     translator: str
+    text: str
 
 
 class TranslatorCreateDataRequired(TypedDict):

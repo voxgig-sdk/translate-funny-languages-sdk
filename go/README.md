@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Load a single translator — the value is the loaded record.
-    translator, err := client.Translator(nil).Load(map[string]any{"translator": "example_translator"}, nil)
+    translator, err := client.Translator(nil).Load(map[string]any{"translator": "example_translator", "text": "example_text"}, nil)
     if err != nil {
         panic(err)
     }
@@ -73,7 +73,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-translator, err := client.Translator(nil).Load(map[string]any{"translator": "example"}, nil)
+translator, err := client.Translator(nil).Load(map[string]any{"translator": "example", "text": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -143,7 +143,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 translator, err := client.Translator(nil).Load(
-    map[string]any{"translator": "example"}, nil,
+    map[string]any{"translator": "example", "text": "example"}, nil,
 )
 if err != nil {
     panic(err)
@@ -299,7 +299,7 @@ Create an instance: `translator := client.Translator(nil)`
 #### Example: Load
 
 ```go
-translator, err := client.Translator(nil).Load(map[string]any{"translator": "translator"}, nil)
+translator, err := client.Translator(nil).Load(map[string]any{"translator": "translator", "text": "text"}, nil)
 if err != nil {
     panic(err)
 }
@@ -317,6 +317,29 @@ if err != nil {
 }
 fmt.Println(result)
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -393,7 +416,7 @@ stores the returned data and match criteria internally.
 
 ```go
 translator := client.Translator(nil)
-translator.Load(map[string]any{"translator": "example"}, nil)
+translator.Load(map[string]any{"translator": "example", "text": "example"}, nil)
 
 // translator.Data() now returns the translator data from the last load
 // translator.Match() returns the last match criteria

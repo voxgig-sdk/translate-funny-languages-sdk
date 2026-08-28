@@ -21,6 +21,7 @@ type Translator struct {
 // TranslatorLoadMatch is the typed request payload for Translator.LoadTyped.
 type TranslatorLoadMatch struct {
 	Translator string `json:"translator"`
+	Text string `json:"text"`
 }
 
 // TranslatorCreateData is the typed request payload for Translator.CreateTyped.
