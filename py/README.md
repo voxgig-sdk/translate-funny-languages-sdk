@@ -38,7 +38,6 @@ client = TranslateFunnyLanguagesSDK()
 
 ### 3. Load a translator
 
-Translator is nested under translator, so provide the `translator`.
 `load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python

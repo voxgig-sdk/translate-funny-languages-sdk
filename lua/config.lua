@@ -61,9 +61,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/translate/{translator}.json",
-                ["parts"] = {
-                  "translate",
-                  "{translator}.json",
+                ["segments"] = {
+                  {
+                    ["lit"] = "translate",
+                  },
+                  {
+                    ["lit"] = "{translator}.json",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -73,6 +77,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "translate",
+                  "{translator}.json",
                 },
               },
             },
@@ -105,9 +113,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/translate/{translator}.json",
-                ["parts"] = {
-                  "translate",
-                  "{translator}.json",
+                ["segments"] = {
+                  {
+                    ["lit"] = "translate",
+                  },
+                  {
+                    ["lit"] = "{translator}.json",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -119,16 +131,16 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
+                ["parts"] = {
+                  "translate",
+                  "{translator}.json",
+                },
               },
             },
           },
         },
         ["relations"] = {
-          ["ancestors"] = {
-            {
-              "translate",
-            },
-          },
+          ["ancestors"] = {},
         },
       },
     },

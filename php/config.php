@@ -87,9 +87,13 @@ class TranslateFunnyLanguagesConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/translate/{translator}.json',
-                  'parts' => [
-                    'translate',
-                    '{translator}.json',
+                  'segments' => [
+                    [
+                      'lit' => 'translate',
+                    ],
+                    [
+                      'lit' => '{translator}.json',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -99,6 +103,10 @@ class TranslateFunnyLanguagesConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'translate',
+                    '{translator}.json',
                   ],
                 ],
               ],
@@ -131,9 +139,13 @@ class TranslateFunnyLanguagesConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/translate/{translator}.json',
-                  'parts' => [
-                    'translate',
-                    '{translator}.json',
+                  'segments' => [
+                    [
+                      'lit' => 'translate',
+                    ],
+                    [
+                      'lit' => '{translator}.json',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -145,16 +157,16 @@ class TranslateFunnyLanguagesConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
+                  'parts' => [
+                    'translate',
+                    '{translator}.json',
+                  ],
                 ],
               ],
             ],
           ],
           'relations' => [
-            'ancestors' => [
-              [
-                'translate',
-              ],
-            ],
+            'ancestors' => [],
           ],
         ],
       ],

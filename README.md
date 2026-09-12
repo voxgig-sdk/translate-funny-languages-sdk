@@ -123,12 +123,8 @@ import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-language
 
 const client = new TranslateFunnyLanguagesSDK()
 
-
-// Load a specific translator (returns a Translator)
-const translator = await client.Translator().load({
-  translator: 'example_translator',
-  text: 'example_text',
-})
+// Load translator data (returns a Translator)
+const translator = await client.Translator().load()
 console.log(translator)
 ```
 
@@ -211,11 +207,8 @@ import sdk "github.com/voxgig-sdk/translate-funny-languages-sdk/go"
 
 client := sdk.New()
 
-
-// Load a specific translator
-translator, err := client.Translator(nil).Load(
-    map[string]any{"translator": "example_translator", "text": "example_text"}, nil,
-)
+// Load translator data
+translator, err := client.Translator(nil).Load(map[string]any{"translator": "example_translator", "text": "example_text"}, nil)
 if err != nil {
     panic(err)
 }
@@ -358,7 +351,7 @@ customizable without forking any upstream tool:
 
 - **The model** (`.sdk/model/`) declares everything this project owns:
   package names, versions, active features, per-target settings. It is
-  written in [aontu](https://github.com/aontu-lang/aontu), a JSON-based
+  written in [aontu](https://aontu.dev), a JSON-based
   specification language designed for building ontologies: easy to edit
   by hand, and files unify rather than override, so small declarations
   compose into one model. Regeneration re-reads it every time.

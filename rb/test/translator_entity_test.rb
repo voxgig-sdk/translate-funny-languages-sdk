@@ -63,7 +63,7 @@ def translator_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["translator01", "translator02", "translator03", "translate01", "translate02", "translate03"],
+    ["translator01", "translator02", "translator03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",
@@ -92,6 +92,9 @@ def translator_basic_setup(extra)
 
   if env["TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
       },
       extra || {},

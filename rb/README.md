@@ -32,8 +32,6 @@ client = TranslateFunnyLanguagesSDK.new
 
 ### 3. Load a translator
 
-Translator is nested under translator, so provide the `translator`.
-
 ```ruby
 begin
   # load returns the ENTITY — call data_get for the Translator record (raises on error).

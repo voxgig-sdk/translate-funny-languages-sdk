@@ -36,9 +36,13 @@ main: kit: entity: translator: {
           }
           method: "POST"
           orig: "/translate/{translator}.json"
-          parts: [
-            "translate"
-            "{translator}.json"
+          segments: [
+            {
+              lit: "translate"
+            }
+            {
+              lit: "{translator}.json"
+            }
           ]
           select: {
             exist: [
@@ -78,9 +82,13 @@ main: kit: entity: translator: {
           }
           method: "GET"
           orig: "/translate/{translator}.json"
-          parts: [
-            "translate"
-            "{translator}.json"
+          segments: [
+            {
+              lit: "translate"
+            }
+            {
+              lit: "{translator}.json"
+            }
           ]
           select: {
             exist: [
@@ -95,14 +103,6 @@ main: kit: entity: translator: {
         }
       ]
     }
-  }
-
-  relations: {
-    ancestors: [
-      [
-        "translate"
-      ]
-    ]
   }
 
 

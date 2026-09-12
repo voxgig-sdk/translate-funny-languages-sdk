@@ -35,8 +35,6 @@ local client = sdk.new()
 
 ### 3. Load a translator
 
-Translator is nested under translator, so provide the `translator`.
-
 ```lua
 local translator, err = client:Translator():load({ translator = "example_translator", text = "example_text" })
 if err then error(err) end
