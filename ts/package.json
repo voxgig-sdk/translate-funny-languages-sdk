@@ -1,5 +1,5 @@
 {
-  "name": "@voxgig-sdk/translate-funny-languages",
+  "name": "@voxgig-sdk/translate-funny-languages-sdk",
   "version": "0.0.1",
   "description": "Unofficial generated TypeScript SDK for the Translate Funny Languages public API. Not affiliated with or endorsed by the upstream API provider.",
   "keywords": [

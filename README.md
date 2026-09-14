@@ -105,7 +105,7 @@ local result, err = client:Translator():load({ translator = "example", text = "e
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
+| TypeScript | `@voxgig-sdk/translate-funny-languages-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
 | Python | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
 | PHP | `voxgig-sdk/translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/translate-funny-languages-sdk/go` | `go get github.com/voxgig-sdk/translate-funny-languages-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Translator():load({ translator = "example", text = "e
 ### TypeScript
 
 ```ts
-import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages'
+import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages-sdk'
 
 const client = new TranslateFunnyLanguagesSDK()
 

@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages'
+import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages-sdk'
 
 const client = new TranslateFunnyLanguagesSDK()
 ```
@@ -423,7 +423,7 @@ translate-funny-languages/
 Import the SDK from the package root:
 
 ```ts
-import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages'
+import { TranslateFunnyLanguagesSDK } from '@voxgig-sdk/translate-funny-languages-sdk'
 ```
 
 ### Entity state
