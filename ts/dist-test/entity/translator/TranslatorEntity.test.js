@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE;
         for (const op of ['create', 'load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'translator.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'translator.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "contents", "req": false, "type": "`$OBJECT`", "index$": 0 }, { "active": true, "name": "success", "req": false, "type": "`$OBJECT`", "index$": 1 }], "name": "translator", "op": { "create": { "input": "data", "name": "create", "points": [{ "active": true, "args": { "params": [{ "active": true, "kind": "param", "name": "translator", "orig": "translator", "reqd": true, "type": "`$STRING`", "index$": 0 }] }, "contract": { "id": "POST /translate/{translator}.json", "json": "{\"operationId\":\"translateTextPost\",\"parameters\":[{\"description\":\"The translator/language to use (e.g., morse, sith, valyrian, yoda, shakespeare, minion, pirate, etc.)\",\"in\":\"path\",\"name\":\"translator\",\"required\":true,\"schema\":{\"enum\":[\"morse\",\"sith\",\"valyrian\",\"yoda\",\"shakespeare\",\"minion\",\"pirate\",\"dothraki\",\"klingon\",\"sindarin\",\"quenya\",\"vulcan\",\"huttese\",\"dolan\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"schema\":{\"properties\":{\"text\":{\"description\":\"The English text to translate\",\"type\":\"string\"}},\"required\":[\"text\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"contents\":{\"properties\":{\"text\":{\"description\":\"The original text\",\"type\":\"string\"},\"translated\":{\"description\":\"The translated text\",\"type\":\"string\"},\"translation\":{\"description\":\"The translation type/language used\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"properties\":{\"total\":{\"description\":\"Number of translations performed\",\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful translation\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"integer\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Bad request - missing or invalid parameters\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"integer\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "POST", "orig": "/translate/{translator}.json", "segments": [{ "lit": "translate" }, { "lit": "{translator}.json" }], "select": { "exist": ["translator"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "create" }, "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "params": [{ "active": true, "kind": "param", "name": "translator", "orig": "translator", "reqd": true, "type": "`$STRING`", "index$": 0 }], "query": [{ "active": true, "kind": "query", "name": "text", "orig": "text", "reqd": true, "type": "`$STRING`", "index$": 0 }] }, "contract": { "id": "GET /translate/{translator}.json", "json": "{\"operationId\":\"translateText\",\"parameters\":[{\"description\":\"The translator/language to use (e.g., morse, sith, valyrian, yoda, shakespeare, minion, pirate, etc.)\",\"in\":\"path\",\"name\":\"translator\",\"required\":true,\"schema\":{\"enum\":[\"morse\",\"sith\",\"valyrian\",\"yoda\",\"shakespeare\",\"minion\",\"pirate\",\"dothraki\",\"klingon\",\"sindarin\",\"quenya\",\"vulcan\",\"huttese\",\"dolan\"],\"type\":\"string\"}},{\"description\":\"The English text to translate\",\"in\":\"query\",\"name\":\"text\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"contents\":{\"text\":\"hello\",\"translated\":\".... . .-.. .-.. ---\",\"translation\":\"morse\"},\"success\":{\"total\":1}},\"schema\":{\"properties\":{\"contents\":{\"properties\":{\"text\":{\"description\":\"The original text\",\"type\":\"string\"},\"translated\":{\"description\":\"The translated text\",\"type\":\"string\"},\"translation\":{\"description\":\"The translation type/language used\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"properties\":{\"total\":{\"description\":\"Number of translations performed\",\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful translation\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"integer\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Bad request - missing or invalid parameters\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"integer\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/translate/{translator}.json", "segments": [{ "lit": "translate" }, { "lit": "{translator}.json" }], "select": { "exist": ["text", "translator"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "translator", "name__orig": "translator", "Name": "Translator", "name_": "translator", "name-": "translator", "NAME": "TRANSLATOR", "index$": 0 }, { "active": true, "entity": "translator", "key$": "BasicTranslatorFlow", "kind": "basic", "name": "BasicTranslatorFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "translator_ref01" }, "match": { "translator": "translator01" }, "op": "create", "spec": [], "valid": [], "index$": 0 }, { "active": true, "data": {}, "input": { "ref": "translator_ref01", "srcdatavar": "translator_ref01_data", "suffix": "_dt0" }, "match": { "translator": "translator01" }, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-translator_ref01" } }], "index$": 1 }] }, 'Translator');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -102,12 +100,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID': idmap,
         'TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE': 'FALSE',
@@ -115,7 +107,13 @@ function basicSetup(extra) {
     });
     idmap = env['TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID'];
     const live = 'TRUE' === env.TRANSLATE_FUNNY_LANGUAGES_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['TRANSLATE_FUNNY_LANGUAGES_TEST_TRANSLATOR_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.TranslateFunnyLanguagesSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -126,7 +124,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -138,7 +137,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.TRANSLATE_FUNNY_LANGUAGES_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

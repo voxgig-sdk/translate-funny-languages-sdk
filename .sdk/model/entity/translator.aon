@@ -34,6 +34,12 @@ main: kit: entity: translator: {
               }
             ]
           }
+          contract: {
+            id: "POST /translate/{translator}.json"
+            json: "{\"operationId\":\"translateTextPost\",\"parameters\":[{\"description\":\"The translator/language to use (e.g., morse, sith, valyrian, yoda, shakespeare, minion, pirate, etc.)\",\"in\":\"path\",\"name\":\"translator\",\"required\":true,\"schema\":{\"enum\":[\"morse\",\"sith\",\"valyrian\",\"yoda\",\"shakespeare\",\"minion\",\"pirate\",\"dothraki\",\"klingon\",\"sindarin\",\"quenya\",\"vulcan\",\"huttese\",\"dolan\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"schema\":{\"properties\":{\"text\":{\"description\":\"The English text to translate\",\"type\":\"string\"}},\"required\":[\"text\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"contents\":{\"properties\":{\"text\":{\"description\":\"The original text\",\"type\":\"string\"},\"translated\":{\"description\":\"The translated text\",\"type\":\"string\"},\"translation\":{\"description\":\"The translation type/language used\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"properties\":{\"total\":{\"description\":\"Number of translations performed\",\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful translation\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"integer\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Bad request - missing or invalid parameters\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"integer\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "POST"
           orig: "/translate/{translator}.json"
           segments: [
@@ -79,6 +85,12 @@ main: kit: entity: translator: {
                 type: "`$STRING`"
               }
             ]
+          }
+          contract: {
+            id: "GET /translate/{translator}.json"
+            json: "{\"operationId\":\"translateText\",\"parameters\":[{\"description\":\"The translator/language to use (e.g., morse, sith, valyrian, yoda, shakespeare, minion, pirate, etc.)\",\"in\":\"path\",\"name\":\"translator\",\"required\":true,\"schema\":{\"enum\":[\"morse\",\"sith\",\"valyrian\",\"yoda\",\"shakespeare\",\"minion\",\"pirate\",\"dothraki\",\"klingon\",\"sindarin\",\"quenya\",\"vulcan\",\"huttese\",\"dolan\"],\"type\":\"string\"}},{\"description\":\"The English text to translate\",\"in\":\"query\",\"name\":\"text\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"contents\":{\"text\":\"hello\",\"translated\":\".... . .-.. .-.. ---\",\"translation\":\"morse\"},\"success\":{\"total\":1}},\"schema\":{\"properties\":{\"contents\":{\"properties\":{\"text\":{\"description\":\"The original text\",\"type\":\"string\"},\"translated\":{\"description\":\"The translated text\",\"type\":\"string\"},\"translation\":{\"description\":\"The translation type/language used\",\"type\":\"string\"}},\"type\":\"object\"},\"success\":{\"properties\":{\"total\":{\"description\":\"Number of translations performed\",\"type\":\"integer\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Successful translation\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"integer\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Bad request - missing or invalid parameters\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"properties\":{\"code\":{\"type\":\"integer\"},\"message\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/translate/{translator}.json"

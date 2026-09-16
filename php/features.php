@@ -4,7 +4,10 @@ declare(strict_types=1);
 // TranslateFunnyLanguages SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class TranslateFunnyLanguagesFeatures
@@ -14,8 +17,14 @@ class TranslateFunnyLanguagesFeatures
         switch ($name) {
             case "base":
                 return new TranslateFunnyLanguagesBaseFeature();
+            case "ratelimit":
+                return new TranslateFunnyLanguagesRatelimitFeature();
+            case "retry":
+                return new TranslateFunnyLanguagesRetryFeature();
             case "test":
                 return new TranslateFunnyLanguagesTestFeature();
+            case "timeout":
+                return new TranslateFunnyLanguagesTimeoutFeature();
             default:
                 return new TranslateFunnyLanguagesBaseFeature();
         }
@@ -31,7 +40,10 @@ class TranslateFunnyLanguagesFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;
