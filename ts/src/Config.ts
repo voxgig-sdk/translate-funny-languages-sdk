@@ -127,9 +127,9 @@ class Config {
 
     entity: {
       
-      translator: {
-      },
-
+        translator: {
+        },
+  
     }
   }
 

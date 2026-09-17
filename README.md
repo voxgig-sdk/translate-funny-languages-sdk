@@ -105,12 +105,12 @@ local result, err = client:Translator():load({ translator = "example", text = "e
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/translate-funny-languages-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
-| Python | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
-| PHP | `voxgig-sdk/translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
+| TypeScript | `@voxgig-sdk/translate-funny-languages-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/tags) |
+| Python | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/tags) |
+| PHP | `voxgig-sdk/translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/translate-funny-languages-sdk/go` | `go get github.com/voxgig-sdk/translate-funny-languages-sdk/go@latest` |
-| Ruby | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
-| Lua | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/releases) |
+| Ruby | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/tags) |
+| Lua | `voxgig-sdk-translate-funny-languages` | publish pending — [install from git tag](https://github.com/voxgig-sdk/translate-funny-languages-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/translate-funny-languages-sdk/go-cli` | `go install github.com/voxgig-sdk/translate-funny-languages-sdk/go-cli/cmd/translate-funny-languages@latest` |
 | Go MCP server | `github.com/voxgig-sdk/translate-funny-languages-sdk/go-mcp` | `go get github.com/voxgig-sdk/translate-funny-languages-sdk/go-mcp@latest` |
 
